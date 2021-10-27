@@ -28,9 +28,15 @@ a.	Admin: login page for admin to edit/add/delete pages (cats+blog). Only admin 
 - React Router
 - NodeJS
 ```
+### MVP
+User-facing page showing cats + about + contact info (no authentication required to view)
+Authenticated login for admins
+Separate views to add/delete animal details
 
 ### Wireframes
-<img src="Images/wireframe.png"/>
+<img src="./drawio/wireframe1.JPG"/>
+<img src="./drawio/wireframe2.JPG"/>
+<img src="./drawio/wireframe3.JPG"/>
 
 ### User Stories
 
