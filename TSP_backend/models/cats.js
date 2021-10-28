@@ -4,7 +4,7 @@ const Comment = require("./comments.js");
 
 const catSchema = new Schema(
   {
-    name: { type: String, required: true, uniqie: true },
+    name: { type: String, required: true, unique: true },
     description: { type: String },
     image: { type: String },
     gender: { type: String },
