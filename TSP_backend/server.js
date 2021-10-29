@@ -34,23 +34,24 @@ app.get("/test", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-  Cat.create(
-    {
-      name: "Ginger",
-      description: "Goodgirl",
-      image: "test",
-      gender: "F",
-      cage: "6/7",
-      adoptable: "Yes",
-    },
-    (error, createdCat) => {
-      if (error) {
-        res.status(400).json({ error: error.message });
-      }
-      // .json() will send proper headers in response so client knows it's json coming back
-      res.status(200).send(createdCat);
-    }
-  );
+  // Cat.create(
+  //   {
+  //     name: "Ginger",
+  //     description: "Goodgirl",
+  //     image: "test",
+  //     gender: "F",
+  //     cage: "6/7",
+  //     adoptable: "Yes",
+  //   },
+  //   (error, createdCat) => {
+  //     if (error) {
+  //       res.status(400).json({ error: error.message });
+  //     }
+  //     // .json() will send proper headers in response so client knows it's json coming back
+  //     res.status(200).send(createdCat);
+  //   }
+  // );
+  res.send("Hello")
 });
 
 // =======================================
