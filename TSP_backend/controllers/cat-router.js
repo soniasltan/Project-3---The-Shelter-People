@@ -9,22 +9,27 @@ const CatCtrl = require('./cat-ctrl')
 // =======================================
 //              GET ROUTES
 // =======================================
-router.get('/cats/:id', CatCtrl.getCatById)
-router.get('/cats', CatCtrl.getCats)
+// This is for show page, showing particular cat
+router.get("/cats/:id", CatCtrl.getCatById);
+// This is for index page, showing all cats
+router.get("/cats", CatCtrl.getCats);
 
 // =======================================
 //              POST ROUTES
 // =======================================
-router.post('/cats', CatCtrl.createCat)
+// This is for new cat
+router.post("/cats", CatCtrl.createCat);
 
 // =======================================
 //              PUT ROUTES
 // =======================================
-router.put('/cats/:id', CatCtrl.updateCat)
+// This is for updating cat
+router.put("/cats/:id", CatCtrl.updateCat);
 
 // =======================================
 //              DELETE ROUTES
 // =======================================
-router.delete('/cats/:id', CatCtrl.deleteCat)
+// Goodbye cat :')
+router.delete("/cats/:id", CatCtrl.deleteCat);
 
-module.exports = router
+module.exports = router;
