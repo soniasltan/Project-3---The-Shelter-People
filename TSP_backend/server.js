@@ -29,6 +29,10 @@ app.use(express.json());
 app.use("/api", catRouter);
 const Cat = require("./models/cats");
 
+app.get("/test", (req, res) => {
+  res.send("this is a test")
+})
+
 app.get("/", (req, res) => {
   Cat.create(
     {
