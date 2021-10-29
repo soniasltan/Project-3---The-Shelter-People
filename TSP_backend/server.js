@@ -1,17 +1,19 @@
 // =======================================
 //              DEPENDENCIES
 // =======================================
+require("dotenv").config()
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT ?? 3000;
 const mongoose = require("mongoose");
 const catRouter = require("./controllers/cat-router");
+const MONGO_URI = process.env.MONGO_URI 
 // =======================================
 //              CONFIGURATION
 // =======================================
 mongoose
-  .connect("mongodb://localhost:27017/catsMERN", { useNewUrlParser: true })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .catch((err) => {
     console.error("Connection error", err.message);
   });
