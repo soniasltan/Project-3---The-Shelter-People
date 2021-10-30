@@ -8,6 +8,7 @@ const app = express();
 const PORT = process.env.PORT ?? 3000;
 const mongoose = require("mongoose");
 const catRouter = require("./controllers/cat-router");
+const commentRouter = require("./controllers/comment-router");
 const MONGO_URI = process.env.MONGO_URI 
 // =======================================
 //              CONFIGURATION
@@ -27,8 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 app.use("/api", catRouter);
+app.use("/api", commentRouter);
 const Cat = require("./models/cats");
-
 app.get("/", (req, res) => {
   Cat.create(
     {
