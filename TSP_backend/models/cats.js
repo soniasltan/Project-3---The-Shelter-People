@@ -4,12 +4,17 @@ const Comment = require("./comments.js");
 
 const catSchema = new Schema(
   {
-    name: { type: String, required: true, unique: true },
-    description: { type: String },
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+      min: [2, "Cat name minimum of 2 characters."],
+    },
+    description: { type: String, required: true },
     image: { type: String },
-    gender: { type: String },
-    cage: { type: String },
-    adoptable: { type: String },
+    gender: { type: String, required: true },
+    cage: { type: String, required: true },
+    adoptable: { type: String, required: true },
     comments: [Comment.schema],
   },
   { timestamps: true }

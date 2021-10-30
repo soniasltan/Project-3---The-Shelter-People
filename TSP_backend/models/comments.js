@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const commentSchema = new Schema(
   {
-    user_id: String,
-    cat_id: String,
+    user_id: { type: String, required: true },
+    cat_id: { type: String, required: true },
     text: {
       type: String,
       min: [3, "Comment cannot be too short"],
