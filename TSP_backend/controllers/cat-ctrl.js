@@ -2,6 +2,7 @@
 //              DATABASE
 // =======================================
 const Cat = require("../models/cats");
+const Comment = require("../models/comments");
 
 // Create all Cats CRUD operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
@@ -62,7 +63,7 @@ const updateCat = async (req, res) => {
     console.log(req.body);
     // update the cat details
     cat.name = req.body.name;
-    cat.description = req.body.desc;
+    cat.description = req.body.description;
     cat.image = req.body.image;
     cat.gender = req.body.gender;
     cat.adoptable = req.body.adoptable;
@@ -88,9 +89,14 @@ const updateCat = async (req, res) => {
 };
 
 // For deleting cat
+// When deleting cat, all the corrresponding comments are deleted too
 const deleteCat = async (req, res) => {
   // find cat by id, then remove
   await Cat.findOneAndDelete({ _id: req.params.id }, (err, cat) => {
+    // remove the comments
+    Comment.remove({ cat_id: { $in: req.params.id } }, (err, data) => {
+      console.log(data);
+    });
     // if there is an error, throw error
     if (err) {
       return res.status(400).json({ success: false, error: err });
