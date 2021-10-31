@@ -7,9 +7,11 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT ?? 3000;
 const mongoose = require("mongoose");
+const session = require("express-session");
 const catRouter = require("./controllers/cat-router");
 const commentRouter = require("./controllers/comment-router");
 const userRouter = require("./controllers/user-router");
+const sessionRouter = require("./controllers/session-router");
 const MONGO_URI = process.env.MONGO_URI 
 // =======================================
 //              CONFIGURATION
@@ -25,12 +27,21 @@ mongoose.connection.on("error", (err) =>
 // =======================================
 //              MIDDLEWARE
 // =======================================
+// for session
+app.use(
+  session({
+    secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
+    resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
+    saveUninitialized: false, // default  more info: https://www.npmjs.com/package/express-session#resave
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 app.use("/api", catRouter);
 app.use("/api", commentRouter);
 app.use("/api", userRouter);
+app.use("/api", sessionRouter);
 const Cat = require("./models/cats");
 app.get("/", (req, res) => {
   Cat.create(
