@@ -14,7 +14,7 @@ const userSchema = new Schema(
       required: true,
       min: [6, "Password cannot be too short. Minimum 6 characters."],
     },
-    role: { type: String, required: true },
+    role: { type: String, required: true, default: "Guest" },
   },
   { timestamps: true }
 );

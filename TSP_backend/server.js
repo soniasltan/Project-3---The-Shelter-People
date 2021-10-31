@@ -9,6 +9,7 @@ const PORT = process.env.PORT ?? 3000;
 const mongoose = require("mongoose");
 const catRouter = require("./controllers/cat-router");
 const commentRouter = require("./controllers/comment-router");
+const userRouter = require("./controllers/user-router");
 const MONGO_URI = process.env.MONGO_URI 
 // =======================================
 //              CONFIGURATION
@@ -29,6 +30,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api", catRouter);
 app.use("/api", commentRouter);
+app.use("/api", userRouter);
 const Cat = require("./models/cats");
 app.get("/", (req, res) => {
   Cat.create(
