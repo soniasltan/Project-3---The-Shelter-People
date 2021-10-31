@@ -17,34 +17,34 @@ const createComment = async (req, res) => {
       error: "You must provide a comment",
     });
   }
-  await Cat.findById(req.params.id, (err, foundCat) => {
+
+  try {
     // req.body exists, so make a new comment
     const comment = new Comment(req.body);
-    // Append the comment to the cat
-    foundCat.comments.push(comment);
-    foundCat.save((err, data) => console.log(data));
+    await comment.save();
+    // now add comment to cat
+    Cat.findById(req.params.id, (err, foundCat) => {
+      // Append the comment to the cat
+      foundCat.comments.push(comment);
+      foundCat.save();
+    });
     // somehow, if the new comment doesn't exist, return error
     if (!comment) {
       return res.status(400).json({ success: false, error: err });
     }
-    // comment exists! So insert it in database
-    comment
-      .save()
-      .then(() => {
-        // return json response if successful
-        return res.status(201).json({
-          success: true,
-          id: comment._id,
-          message: "Comment created!",
-        });
-      })
-      .catch((error) => {
-        return res.status(400).json({
-          error,
-          message: "Comment not created!",
-        });
-      });
-  });
+
+    // success!
+    res.status(201).json({
+      success: true,
+      id: comment._id,
+      message: "Comment created!",
+    });
+  } catch (err) {
+    res.status(400).json({
+      err,
+      message: "Comment not created!",
+    });
+  }
 };
 
 // For updating comment
@@ -96,22 +96,25 @@ const updateComment = async (req, res) => {
 // For deleting comment
 // need to remove comment from particular cat
 const deleteComment = async (req, res) => {
-  // find comment by id, then remove
-  await Comment.findOneAndDelete({ _id: req.params.id }, (err, comment) => {
-    // if there is an error, throw error
-    if (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
-
+  try {
+    const comment = await Comment.findById(req.params.id);
+    // remove comment from cat
+    const cat = await Cat.findById(comment.cat_id);
+    cat.comments.id(req.params.id).remove();
+    await cat.save();
+    // remove the comment
+    await comment.remove();
     // if the comment doesnt exist, throw error
     if (!comment) {
       return res
         .status(404)
         .json({ success: false, error: `Comment not found` });
     }
-    // return json response if successful
-    return res.status(200).json({ success: true, data: comment });
-  }).catch((err) => console.log(err));
+
+    res.status(200).json({ success: true, data: comment });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err });
+  }
 };
 
 // export the modules - CRUD
