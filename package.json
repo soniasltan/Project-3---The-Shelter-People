@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd TSP_backend && npm start"
+    "start": "cd tsp_backend && npm start"
   },
   "repository": {
     "type": "git",
