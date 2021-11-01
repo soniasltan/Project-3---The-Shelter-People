@@ -27,6 +27,7 @@ mongoose.connection.on("error", (err) =>
 // =======================================
 //              MIDDLEWARE
 // =======================================
+app.use(express.static(path.join(__dirname, "./tsp_frontend/build")));
 // for session
 app.use(
   session({
