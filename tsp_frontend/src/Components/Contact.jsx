@@ -10,8 +10,8 @@ function Contact() {
   return (
     <>
       <h1>Contact us!</h1>
-      <P>We are located at Animal Lodge @ 59 Sungei Tengah Road, Block V, Singapore 699014</P>
-      <P>Would you love to volunteer? Contact us today at our instagram!</P>
+      <P>We are located at The Animal Lodge @ 59 Sungei Tengah Road, Singapore 699014</P>
+      <P>Would you love to volunteer? Check out our instagram <a href = "https://www.instagram.com/theshelterpeople_sg/">@theshelterpeople_sg</a> </P>
     </>
   );
 }

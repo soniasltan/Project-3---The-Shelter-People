@@ -46,7 +46,7 @@ const Cat = require("./models/cats");
 app.get("/", (req, res) => {
   Cat.create(
     {
-      name: "Emoli",
+      name: "Mm",
       description: "Very emo, like to keep to herself",
       image: "test",
       gender: "F",
