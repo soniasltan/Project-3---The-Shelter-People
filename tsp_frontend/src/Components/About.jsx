@@ -10,7 +10,7 @@ function About() {
   return (
     <>
       <h1>About us</h1>
-      <P>Hey there, we're a group of volunteers who volunteers at the shelter every Sunday.</P>
+      <P>Hey there, we're a group of volunteers who volunteers at the shelter weekly.</P>
       <P>we love animals!</P>
     </>
   );
