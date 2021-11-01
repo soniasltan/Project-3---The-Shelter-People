@@ -1,17 +1,30 @@
 import React, { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useState } from "react-router-dom";
 import axios from "axios";
 
+//Change to Controlled Form to repopulate the value
+//onchange
+
 function CatsUpdate() {
-  const inputCatName = useRef();
+  let id = useParams();
+  const [catDetail, setCatDetail] = useState("");
+  const [inputCatName, setInputCatName] = useState("");
   const inputCatDescription = useRef();
   const inputCatImage = useRef();
   const inputCatGender = useRef();
   const inputCatAdopt = useRef();
   const inputCatCage = useRef();
 
-  let id = useParams();
-  
+  // get the cat data for the update form
+  useEffect(() => {
+    async function getCatData() {
+      await axios.get(`http://localhost:3000/api/cats/${id.id}`).then((cat) => {
+        setCatDetail(cat.data.data);
+      });
+    }
+    getCatData();
+  }, []);
+
   const handleUpdate = async () => {
     const name = inputCatName.current.value;
     const description = inputCatDescription.current.value;
@@ -22,17 +35,18 @@ function CatsUpdate() {
 
     const payload = { name, description, image, gender, adoptable, cage };
 
-    await axios.put(`http://localhost:3000/api/cats/${id}`, payload).then((res) => {
-      window.alert(`Cat updated successfully!`);
-    });
-
+    await axios
+      .put(`http://localhost:3000/api/cats/${id.id}`, payload)
+      .then((res) => {
+        window.alert(`Cat updated successfully!`);
+      });
   };
 
   return (
     <div>
       <p>In this page you'll see the form to update a cat</p>
       <label>name:</label>
-      <input type="text" ref={inputCatName} />
+      <input type="text" value={catDetail.name} onChange={}/>
       <label>description:</label>
       <input type="text" ref={inputCatDescription} />
       <label>image:</label>
