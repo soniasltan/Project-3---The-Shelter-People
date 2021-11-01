@@ -3,9 +3,10 @@ import React from "react";
 function CatsCreate() {
  
   return (
-    <div>
-     Make new cat
-    </div>
+    <>
+    <input name="create" placeholder="Create Cat" />
+    <button>Create New Cats</button>
+    </>
   );
 }
 
