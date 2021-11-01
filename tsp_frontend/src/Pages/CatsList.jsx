@@ -3,9 +3,9 @@ import React from "react";
 function CatsList() {
  
   return (
-    <div>
-     Cat list
-    </div>
+    <>
+    <h1>View All Cats!</h1>
+    </>
   );
 }
 
