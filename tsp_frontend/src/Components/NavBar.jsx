@@ -36,7 +36,7 @@ function NavBar() {
           <Li>Cats</Li>
         </LinkStyled>
         <LinkStyled to="/contact" className="contact">
-          <Li>Contact</Li>
+          <Li>Contact us</Li>
         </LinkStyled>
         <LinkStyled to="/about" className="about">
           <Li>About</Li>
