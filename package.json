@@ -2,10 +2,10 @@
   "name": "project3",
   "version": "1.0.0",
   "description": "Animal Shelter Website for TheShelterPeople.",
-  "main": "./TSP_backend/server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd TSP_backend && npm run start"
+    "start": "cd TSP_backend && npm start"
   },
   "repository": {
     "type": "git",
