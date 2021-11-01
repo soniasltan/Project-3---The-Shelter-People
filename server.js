@@ -5,6 +5,7 @@ require("dotenv").config()
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const path = require("path")
 const PORT = process.env.PORT ?? 3000;
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -27,6 +28,7 @@ mongoose.connection.on("error", (err) =>
 // =======================================
 //              MIDDLEWARE
 // =======================================
+app.use(express.static(path.join(__dirname, "./tsp_frontend/build")));
 // for session
 app.use(
   session({
@@ -46,7 +48,7 @@ const Cat = require("./models/cats");
 app.get("/", (req, res) => {
   Cat.create(
     {
-      name: "Emoli",
+      name: "Mm",
       description: "Very emo, like to keep to herself",
       image: "test",
       gender: "F",
