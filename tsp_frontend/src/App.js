@@ -8,30 +8,37 @@ import Contact from "./Components/Contact";
 import CatsList from "./Pages/CatsList";
 import CatsUpdate from "./Pages/CatsUpdate";
 import CatsCreate from "./Pages/CatsCreate";
+import AuthCatShow from "./Pages/AuthCatShow";
+import CatShow from "./Pages/CatShow";
 
 function App() {
   return (
     <div className="App">
       <NavBar />
       <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/cats">
-            <CatsList />
-          </Route>
-          <Route path="/cats/new">
-            <CatsCreate />
-          </Route>
-          <Route path="/cats/:id/edit">
-            <CatsUpdate />
-          </Route>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/cats">
+          <CatsList />
+        </Route>
+        {/* Not sure how to implement sessions yet, if Auth, show AuthCatShow, otherwise, CatShow */}
+        <Route path="/cats/:id">
+          <AuthCatShow />
+          {/* <CatShow /> */}
+        </Route>
+        <Route path="/cats/new">
+          <CatsCreate />
+        </Route>
+        <Route path="/cats/:id/edit">
+          <CatsUpdate />
+        </Route>
       </Switch>
     </div>
   );
