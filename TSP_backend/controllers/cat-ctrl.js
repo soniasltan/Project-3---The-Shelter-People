@@ -2,12 +2,13 @@
 //              DATABASE
 // =======================================
 const Cat = require("../models/cats");
+const Comment = require("../models/comments");
 
 // Create all Cats CRUD operations
 // status errors refer: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 
-// For making a new cat
-const createCat = (req, res) => {
+// For creating cat
+const createCat = async (req, res) => {
   // if there is no req.body, return error
   if (!req.body) {
     return res.status(400).json({
@@ -15,30 +16,29 @@ const createCat = (req, res) => {
       error: "You must provide a cat",
     });
   }
-  // req.body exists, so make a new cat
-  const cat = new Cat(req.body);
 
-  // somehow, if the new cat doesn't exist, return error
-  if (!cat) {
-    return res.status(400).json({ success: false, error: err });
-  }
-  // cat exists! So insert it in database
-  cat
-    .save()
-    .then(() => {
-      // return json response if successful
-      return res.status(201).json({
-        success: true,
-        id: cat._id,
-        message: "Cat created!",
-      });
-    })
-    .catch((error) => {
-      return res.status(400).json({
-        error,
-        message: "Cat not created!",
-      });
+  try {
+    // req.body exists, so make a new cat
+    const cat = new Cat(req.body);
+    await cat.save();
+
+    // somehow, if the new cat doesn't exist, return error
+    if (!cat) {
+      return res.status(400).json({ success: false, error: err });
+    }
+
+    // success!
+    res.status(201).json({
+      success: true,
+      id: cat._id,
+      message: "Cat created!",
     });
+  } catch (err) {
+    res.status(400).json({
+      err,
+      message: "Cat not created!",
+    });
+  }
 };
 
 // For updating cat
@@ -51,89 +51,87 @@ const updateCat = async (req, res) => {
     });
   }
 
-  // req.body exists, so find the cat by id and then update
-  Cat.findOne({ _id: req.params.id }, (err, cat) => {
-    if (err) {
-      return res.status(404).json({
-        err,
-        message: "Cat not found!",
-      });
-    }
-    console.log(req.body);
+  try {
+    // req.body exists, so find the cat by id and then update
+    const cat = await Cat.findById(req.params.id);
     // update the cat details
     cat.name = req.body.name;
-    cat.description = req.body.desc;
+    cat.description = req.body.description;
     cat.image = req.body.image;
     cat.gender = req.body.gender;
     cat.adoptable = req.body.adoptable;
     cat.cage = req.body.cage;
     // save the updated cat
-    cat
-      .save()
-      .then(() => {
-        // return json response if successful
-        return res.status(200).json({
-          success: true,
-          id: cat._id,
-          message: "Cat updated!",
-        });
-      })
-      .catch((error) => {
-        return res.status(404).json({
-          error,
-          message: "Cat not updated!",
-        });
+    await cat.save();
+    if (!cat) {
+      return res.status(404).json({
+        err,
+        message: "Cat not found!",
       });
-  });
+    }
+
+    res.status(200).json({
+      success: true,
+      id: cat._id,
+      message: "Cat updated!",
+    });
+  } catch (err) {
+    res.status(404).json({
+      error,
+      message: "Cat not updated!",
+    });
+  }
 };
 
 // For deleting cat
+// When deleting cat, all the corrresponding comments are deleted too
 const deleteCat = async (req, res) => {
-  // find cat by id, then remove
-  await Cat.findOneAndDelete({ _id: req.params.id }, (err, cat) => {
-    // if there is an error, throw error
-    if (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
-
+  try {
+    const cat = await Cat.findById(req.params.id);
+    // remove comments associated with the cat
+    Comment.remove({ cat_id: { $in: req.params.id } }, (err, data) => {
+      console.log(data);
+    });
+    // remove the cat
+    await cat.remove();
     // if the cat doesnt exist, throw error
     if (!cat) {
       return res.status(404).json({ success: false, error: `Cat not found` });
     }
-    // return json response if successful
-    return res.status(200).json({ success: true, data: cat });
-  }).catch((err) => console.log(err));
+    res.status(200).json({ success: true, data: cat });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err });
+  }
 };
 
 // For showing a particular cat
 const getCatById = async (req, res) => {
-  // find the cat by id
-  await Cat.findOne({ _id: req.params.id }, (err, cat) => {
-    if (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
-
+  try {
+    // find the cat by id
+    const cat = await Cat.findById(req.params.id);
     if (!cat) {
       return res.status(404).json({ success: false, error: `Cat not found` });
     }
     // return json response if successful
-    return res.status(200).json({ success: true, data: cat });
-  }).catch((err) => console.log(err));
+    res.status(200).json({ success: true, data: cat });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err });
+  }
 };
 
 // For showing all cats - this is the cat index page
 const getCats = async (req, res) => {
-  // find all the cats
-  await Cat.find({}, (err, cats) => {
-    if (err) {
-      return res.status(400).json({ success: false, error: err });
-    }
-    if (!cats.length) {
-      return res.status(404).json({ success: false, error: `Cat not found` });
+  try {
+    // find all cats
+    const cats = await Cat.find();
+    if (!cats) {
+      return res.status(404).json({ success: false, error: `Cats not found` });
     }
     // return json response if successful
-    return res.status(200).json({ success: true, data: cats });
-  }).catch((err) => console.log(err));
+    res.status(200).json({ success: true, data: cats });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err });
+  }
 };
 
 // export the modules - CRUD
