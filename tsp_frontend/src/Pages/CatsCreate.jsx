@@ -22,36 +22,41 @@ function CatsCreate() {
     const gender = inputCatGender.current.value;
     const adoptable = inputCatAdopt.current.value;
     const cage = inputCatCage.current.value;
-    // const catsName = event.target.catsName.value;
-    // addCats(catsName);
-    const catInformation = { name, description, image, gender, adoptable, cage };
+    const catInformation = {
+      name,
+      description,
+      image,
+      gender,
+      adoptable,
+      cage,
+    };
     await axios.post(`http://localhost:3000/api/cats/`, catInformation).then((res) => {
-      window.alert(`Cat created successfully!`);
-      history.push(`/cats/list`);
-    });
+        window.alert(`Cat created successfully!`);
+        history.push(`/cats/list`);
+      });
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>name:</label>
-        <input type="text" ref={inputCatName} />
-        <label>description:</label>
-        <input type="text" ref={inputCatDescription} />
-        <label>image:</label>
-        <input type="text" ref={inputCatImage} />
-        <label>gender:</label>
+        <label>Name:</label>
+        <input type="text" ref={inputCatName} minLength="2" />
+        <label>Description:</label>
+        <input type="text" ref={inputCatDescription} minLength="1" />
+        <label>Image url:</label>
+        <input type="url" ref={inputCatImage} minLength="5" />
+        <label>Gender:</label>
         <select ref={inputCatGender}>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Unknown">Unknown</option>
         </select>
-        <label>adopt:</label>
+        <label>Adoptable:</label>
         <select ref={inputCatAdopt}>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
-        <label>cage:</label>
+        <label>Cage:</label>
         <select ref={inputCatCage}>
           <option value="6/7">6/7</option>
           <option value="2">2</option>
