@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
 import NavBar from "./Components/NavBar";
 import About from "./Components/About";
@@ -14,20 +14,18 @@ import CatShow from "./Pages/CatShow";
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/cats/:id">
-            <AuthCatShow />
-          </Route>
+      <Router>
+        <NavBar />
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Switch>
           <Route path="/cats/list">
             <CatsList />
           </Route>
@@ -37,7 +35,11 @@ function App() {
           <Route path="/cats/edit/:id">
             <CatsUpdate />
           </Route>
-      </Switch>
+          <Route path="/cats/:id">
+            <AuthCatShow />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
