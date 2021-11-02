@@ -49,32 +49,32 @@ function CatsUpdate() {
         value={inputCatName.name}
         onChange={(e) => setInputCatName(e.target.value)}
       />
-      <label>description:</label>
+      <label>Description:</label>
       <input
         type="text"
         placeholder="description"
         value={inputCatDescription.description}
         onChange={(e) => setInputCatDescription(e.target.value)}
       />
-      <label>image:</label>
+      <label>Image:</label>
       <input
         type="text"
         placeholder="imageURL"
         value={inputCatImage.image}
         onChange={(e) => setInputCatImage(e.target.value)}
       />
-      <label>gender:</label>
+      <label>Gender:</label>
       <select value={inputCatGender.gender} >
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Unknown">Unknown</option>
       </select>
-      <label>adopt:</label>
+      <label>Adopt:</label>
       <select value={inputCatAdopt.adoptable}>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
-      <label>cage:</label>
+      <label>Cage:</label>
       <select value={inputCatCage.cage}>
         <option value="6/7">6/7</option>
         <option value="2">2</option>
