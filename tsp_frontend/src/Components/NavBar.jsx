@@ -25,7 +25,7 @@ const LinkStyled = styled(Link)`
   color: black;
 `;
 
-function NavBar() {
+function NavBar({role}) {
   return (
     <>
       <Navbar>
@@ -41,9 +41,17 @@ function NavBar() {
         <LinkStyled to="/about" className="about">
           <Li>About</Li>
         </LinkStyled>
+        <LinkStyled to="/users/new" className="signup">
+          <Li>Signup</Li>
+        </LinkStyled>
         <LinkStyled to="/login" className="login">
           <Li>Login</Li>
         </LinkStyled>
+        {role === "Admin" && (
+        <LinkStyled to="/cats/new" className="login">
+          <Li>NewCat</Li>
+        </LinkStyled>
+          )}
       </Navbar>
     </>
   );

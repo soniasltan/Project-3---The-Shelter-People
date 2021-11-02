@@ -3,10 +3,6 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-const LinkStyled = styled(Link)`
-  text-decoration: none;
-  color: black;
-`;
 const Img = styled.img`
   border-radius: 50%;
 `;
@@ -72,7 +68,7 @@ function AuthCatShow() {
     <>
       <div>
         <h1>{cat?.name}</h1>
-        <Img src={cat?.image} alt={cat?.name} width="400px" height="400px" />
+        <Img src={cat?.image} alt={cat?.name} width="auto" height="400px" />
         <p>Description: {cat?.description}</p>
         <p>Gender: {cat?.gender}</p>
         <p>Adoptable: {cat?.adoptable}</p>
