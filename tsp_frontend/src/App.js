@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
@@ -14,6 +14,9 @@ import Login from "./Pages/Login"
 import UserCreate from "./Pages/UserCreate"
 
 function App() {
+  const [auth, setAuth] = useState("NoAuth");
+  const [role, setRole] = useState("Guest");
+
   return (
     <div className="App">
       <Router>
@@ -29,7 +32,7 @@ function App() {
         </Route>
         <Switch>
         <Route path="/login">
-          <Login />
+          <Login auth={auth} setAuth={setAuth} setRole={setRole} />
         </Route>
         <Route path="/users/new">
           <UserCreate />

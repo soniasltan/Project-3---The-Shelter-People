@@ -6,6 +6,14 @@ const router = express.Router();
 // get the CRUD operations
 const CatCtrl = require("./cat-ctrl");
 
+const isAdminAuthenticated = (req, res, next) => {
+    if (req.session.currentUser.role === "Admin") {
+        return next()
+    } else {
+        console.log("Not admin!")
+    }
+  }
+
 // =======================================
 //              GET ROUTES
 // =======================================
@@ -19,7 +27,7 @@ router.get("/cats", CatCtrl.getCats);
 //              POST ROUTES
 // =======================================
 // This is for new cat
-router.post("/cats", CatCtrl.createCat);
+router.post("/cats", isAdminAuthenticated, CatCtrl.createCat);
 
 // =======================================
 //              PUT ROUTES
