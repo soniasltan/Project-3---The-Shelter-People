@@ -42,13 +42,13 @@ function UserCreate() {
         <h1>Create New User</h1>
         <form onSubmit={handleSubmit}>
             <label>Email: 
-                <input name="email" value={user.email} onChange={handleEmailChange}></input>
+                <input type="email" name="email" value={user.email} onChange={handleEmailChange}></input>
             </label>
             <label>Username: 
-                <input name="username" value={user.username} onChange={handleUsernameChange}></input>
+                <input type="text" name="username" value={user.username} onChange={handleUsernameChange}></input>
             </label>
             <label>Password (min. 6 chars): 
-                <input name="password" value={user.password} onChange={handlePasswordChange}></input>
+                <input type="password" name="password" value={user.password} onChange={handlePasswordChange}></input>
             </label>
             <button>Create User</button>
         </form>
