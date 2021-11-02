@@ -16,29 +16,27 @@ function App() {
     <div className="App">
       <NavBar />
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/cats">
-          <CatsList />
-        </Route>
-        {/* Not sure how to implement sessions yet, if Auth, show AuthCatShow, otherwise, CatShow */}
-        <Route path="/cats/:id">
-          <AuthCatShow />
-          {/* <CatShow /> */}
-        </Route>
-        <Route path="/cats/new">
-          <CatsCreate />
-        </Route>
-        <Route path="/cats/:id/edit">
-          <CatsUpdate />
-        </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/cats/:id">
+            <AuthCatShow />
+          </Route>
+          <Route path="/cats/list">
+            <CatsList />
+          </Route>
+          <Route path="/cats/new">
+            <CatsCreate />
+          </Route>
+          <Route path="/cats/edit/:id">
+            <CatsUpdate />
+          </Route>
       </Switch>
     </div>
   );
