@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkStyled = styled(Link)`
@@ -13,8 +13,13 @@ const Img = styled.img`
 
 function CatShow() {
   let id = useParams();
+  let history = useHistory();
   // For the cat data
   const [cat, setCat] = useState();
+  // handle function to return user to cat list page
+  const catListPage = () => {
+    history.push(`/cats/list`);
+  };
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatData() {
@@ -34,9 +39,7 @@ function CatShow() {
         <p>Gender: {cat?.gender}</p>
         <p>Adoptable: {cat?.adoptable}</p>
         <p>Cage: {cat?.cage}</p>
-        <button>
-          <LinkStyled to={`/cats/list`}> Back </LinkStyled>
-        </button>
+        <button onClick={() => catListPage()}>Back</button>
       </div>
     </>
   );

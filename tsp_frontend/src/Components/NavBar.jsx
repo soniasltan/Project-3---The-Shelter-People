@@ -32,7 +32,7 @@ function NavBar() {
         <LinkStyled to="/" className="home">
           <Li>Home</Li>
         </LinkStyled>
-        <LinkStyled to="/cats" className="cats">
+        <LinkStyled to="/cats/list" className="cats">
           <Li>Cats</Li>
         </LinkStyled>
         <LinkStyled to="/contact" className="contact">

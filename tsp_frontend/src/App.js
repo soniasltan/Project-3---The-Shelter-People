@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
 import NavBar from "./Components/NavBar";
 import About from "./Components/About";
@@ -16,8 +16,8 @@ import UserCreate from "./Pages/UserCreate"
 function App() {
   return (
     <div className="App">
-      <NavBar />
-      <Switch>
+      <Router>
+        <NavBar />
         <Route exact path="/">
           <Home />
         </Route>
@@ -27,27 +27,27 @@ function App() {
         <Route path="/contact">
           <Contact />
         </Route>
+        <Switch>
         <Route path="/login">
           <Login />
         </Route>
         <Route path="/users/new">
           <UserCreate />
         </Route>
-        <Route path="/cats">
-          <CatsList />
-        </Route>
-        {/* Not sure how to implement sessions yet, if Auth, show AuthCatShow, otherwise, CatShow */}
-        <Route path="/cats/:id">
-          <AuthCatShow />
-          {/* <CatShow /> */}
-        </Route>
-        <Route path="/cats/new">
-          <CatsCreate />
-        </Route>
-        <Route path="/cats/:id/edit">
-          <CatsUpdate />
-        </Route>
-      </Switch>
+          <Route path="/cats/list">
+            <CatsList />
+          </Route>
+          <Route path="/cats/new">
+            <CatsCreate />
+          </Route>
+          <Route path="/cats/edit/:id">
+            <CatsUpdate />
+          </Route>
+          <Route path="/cats/:id">
+            <AuthCatShow />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
