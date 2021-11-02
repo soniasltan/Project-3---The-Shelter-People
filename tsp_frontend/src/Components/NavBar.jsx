@@ -25,7 +25,7 @@ const LinkStyled = styled(Link)`
   color: black;
 `;
 
-function NavBar({role}) {
+function NavBar({ role, auth, handleLogOut, userName }) {
   return (
     <>
       <Navbar>
@@ -41,17 +41,23 @@ function NavBar({role}) {
         <LinkStyled to="/about" className="about">
           <Li>About</Li>
         </LinkStyled>
-        <LinkStyled to="/users/new" className="signup">
-          <Li>Signup</Li>
-        </LinkStyled>
-        <LinkStyled to="/login" className="login">
-          <Li>Login</Li>
-        </LinkStyled>
-        {role === "Admin" && (
-        <LinkStyled to="/cats/new" className="login">
-          <Li>NewCat</Li>
-        </LinkStyled>
-          )}
+        {auth === "NoAuth" ? (
+          <>
+            <LinkStyled to="/users/new" className="signup">
+              <Li>Signup</Li>
+            </LinkStyled>
+            <LinkStyled to="/login" className="login">
+              <Li>Login</Li>
+            </LinkStyled>
+          </>
+        ) : (
+          <>
+            <p>&#128571; Hello {userName}! &#128571;</p>
+            <LinkStyled to="/" className="logout">
+              <Li onClick={handleLogOut}>Logout</Li>
+            </LinkStyled>
+          </>
+        )}
       </Navbar>
     </>
   );

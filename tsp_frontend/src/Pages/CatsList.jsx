@@ -10,7 +10,7 @@ const LinkStyled = styled(Link)`
 const Img = styled.img`
   border-radius: 50%;
 `;
-function CatsList() {
+function CatsList({ role }) {
   // For the cat data
   const [cats, setCats] = useState([]);
   let history = useHistory();
@@ -26,7 +26,7 @@ function CatsList() {
 
   const deleteCat = (id) => {
     axios.delete(`http://localhost:3000/api/cats/${id}`);
-    history.push(`/cats/list`);
+    history.push(`/`);
   };
 
   const updateCat = (id) => {
@@ -52,8 +52,15 @@ function CatsList() {
                 <br />
                 {element.name}
                 <br />
-                <button onClick={() => deleteCat(element._id)}>X</button>
-                <button onClick={() => updateCat(element._id)}>update</button>
+                {/* Only allow delete/update if admin */}
+                {role === "Admin" && (
+                  <>
+                    <button onClick={() => updateCat(element._id)}>
+                      Update
+                    </button>
+                    <button onClick={() => deleteCat(element._id)}>X</button>
+                  </>
+                )}
               </p>
             </div>
           </>
