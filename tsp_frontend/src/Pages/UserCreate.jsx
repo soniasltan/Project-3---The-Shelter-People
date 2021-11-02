@@ -26,7 +26,13 @@ function UserCreate() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        if (user.password.length < 6) {
+            alert("Password must be at least 6 characters long!")
+        } else {
         addUser(user)
+        alert(`New user ${user.username} created successfully!`)
+        
+        }
     }
 
     return (

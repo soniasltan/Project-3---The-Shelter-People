@@ -33,7 +33,7 @@ function Login() {
             <input name="username" value={login.username} onChange={handleUsernameChange}></input>
             </label>
             <label>Password: 
-                <input name="password" value={login.password} onChange={handlePasswordChange}></input>
+                <input name="password" value={login.password} onChange={handlePasswordChange} minlength="6"></input>
             </label>
             <input type="submit" onClick={handleSubmit} value="Submit" />
         </form>
