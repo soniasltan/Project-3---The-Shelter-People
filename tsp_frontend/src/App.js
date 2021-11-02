@@ -10,6 +10,8 @@ import CatsUpdate from "./Pages/CatsUpdate";
 import CatsCreate from "./Pages/CatsCreate";
 import AuthCatShow from "./Pages/AuthCatShow";
 import CatShow from "./Pages/CatShow";
+import Login from "./Pages/Login"
+import UserCreate from "./Pages/UserCreate"
 
 function App() {
   return (
@@ -24,6 +26,12 @@ function App() {
         </Route>
         <Route path="/contact">
           <Contact />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/users/new">
+          <UserCreate />
         </Route>
         <Route path="/cats">
           <CatsList />
