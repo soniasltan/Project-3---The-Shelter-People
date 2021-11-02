@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import styled from 'styled-components'
 
-//Change to Controlled Form to repopulate the value
+const Label = styled.label`
+    margin: 5px;
+`;
 
 function CatsUpdate() {
   const history = useHistory();
@@ -21,7 +24,7 @@ function CatsUpdate() {
     const getCatData = async (id) => {
       const url = `http://localhost:3000/api/cats/${id}`;
       const catData = await axios.get(url);
-      setCatDetail(catData.data);
+      setCatDetail(catData);
     };
     getCatData(id);
   }, [id]);
@@ -56,11 +59,8 @@ function CatsUpdate() {
 
     // const catDetail = { name, description, image, gender, adoptable, cage };
       await axios.put(`http://localhost:3000/api/cats/${catDetail._id}`, catDetail)
-      .then((res) => {
-        window.alert(`Cat updated successfully!`);
-        history.push(`/cats/list`);
-      });
-  };
+      history.push(`/cats/list`);
+      };
 
 // await axios.put(`http://localhost:3000/api/cats/${catDetail._id}`, catDetail)
 // .then((res) => {
@@ -71,41 +71,41 @@ function CatsUpdate() {
 // }
 
   return (
-    <div>
-      <p>In this page you'll see the form to update a cat</p>
-      <form onSubmit={handleUpdate}>
-      <label>Name:</label>
+    <>
+      <h1>Update Cat Details</h1>
+      <form>
+      <Label>Name:</Label>
       <input
         type="text"
         placeholder="name"
         value={catDetail.name}
         onChange={changeName}
       />
-      <label>Description:</label>
+      <Label>Description:</Label>
       <input
         type="textarea"
-        placeholder="description"
+        placeholder="description" size="2em"
         value={catDetail.description}
         onChange={changeDescription}
       />
-      <label>Image:</label>
+      <Label>Image:</Label>
       <input
         type="text"
         placeholder="imageURL"
         value={catDetail.image}
       />
-      <label>Gender:</label>
+      <Label>Gender:</Label>
       <select value={catDetail.gender}>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Unknown">Unknown</option>
       </select>
-      <label>Adopt:</label>
+      <Label>Adopt:</Label>
       <select value={catDetail.adoptable}>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
-      <label>Cage:</label>
+      <Label>Cage:</Label>
       <select value={catDetail.cage}>
         <option value="6/7">6/7</option>
         <option value="2">2</option>
@@ -115,10 +115,10 @@ function CatsUpdate() {
         <option value="8">8</option>
         <option value="9">9</option>
       </select>
-      <button>Update Cat</button>
+      <button type="submit" onClick={handleUpdate} value="Update Cat">Update Cat</button>
       <button href={'/cats/list'}>Cancel</button>
       </form>
-    </div>
+      </>
   );
 }
 
