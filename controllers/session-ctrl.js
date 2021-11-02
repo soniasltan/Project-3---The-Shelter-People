@@ -42,6 +42,8 @@ const createSession = async (req, res) => {
       // success!
       res.status(201).json({
         success: true,
+        role: user.role,
+        username: user.username,
         message: "Login success!",
       });
     } else {
