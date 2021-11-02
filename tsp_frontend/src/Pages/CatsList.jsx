@@ -36,6 +36,14 @@ function CatsList({ role }) {
   return (
     <div>
       <h1>Cats</h1>
+      {/* Only allow admin to make new cat */}
+      {role === "Admin" && (
+        <>
+          <LinkStyled to="/cats/new">
+            <button>Create Cat</button>
+          </LinkStyled>
+        </>
+      )}
       {cats.map((element) => {
         return (
           <>

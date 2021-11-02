@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-function Login({ auth, setAuth, setRole }) {
+function Login({ setAuth, setRole, setUsername }) {
   const [login, setLogin] = useState({});
   const history = useHistory();
 
@@ -18,21 +18,22 @@ function Login({ auth, setAuth, setRole }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("login", login);
     await axios
       .post(`http://localhost:3000/api/login`, login)
       .then((res) => {
         console.log(res);
         if (res.data.success === true) {
           setAuth("Auth");
+          setUsername(res.data.username);
           if (res.data.role === "Admin") {
-              setRole("Admin");
+            setRole("Admin");
           }
-        
+          history.push(`/`);
         }
       })
       .catch((err) => {
         console.log("err", err);
+        alert(`Sorry, login failed! If you do not have an account, please sign up for one.`);
       });
   };
 
@@ -43,6 +44,7 @@ function Login({ auth, setAuth, setRole }) {
         <label>
           Username:
           <input
+            type="text"
             name="username"
             value={login.username}
             onChange={handleUsernameChange}

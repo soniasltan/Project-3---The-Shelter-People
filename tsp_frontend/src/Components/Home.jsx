@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import CatsCreate from "../Pages/CatsCreate";
 
 const P = styled.p`
   margin: 8px;
