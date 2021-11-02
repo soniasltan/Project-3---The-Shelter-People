@@ -9,7 +9,7 @@ const commentSchema = new Schema(
       type: String,
       min: [3, "Comment cannot be too short"],
     },
-    email: { type: String, required: true },
+    username: { type: String, required: true },
   },
   { timestamps: true }
 );
