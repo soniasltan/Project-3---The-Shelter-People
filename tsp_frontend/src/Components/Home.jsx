@@ -17,7 +17,6 @@ function Home() {
       <P>We hope to create more opportunities to connect and awareness to the public on not abandoning their pets, pets are for life.</P>
       <P>In turn, visits to the shelter can help the shelter cats to become more sociable and gain higher chance at getting adopted.</P>
       <P>So join our journey here. Feel free to reach out to us via our contact page for more information with regards to the shelter, volunteering, adoption or cat related knowledge!</P>
-      <CatsCreate />
     </>
   );
 }
