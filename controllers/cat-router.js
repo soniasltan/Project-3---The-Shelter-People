@@ -7,7 +7,8 @@ const router = express.Router();
 const CatCtrl = require("./cat-ctrl");
 
 const isAdminAuthenticated = (req, res, next) => {
-    if (req.session.currentUser.role === "Admin") {
+    console.log("logged in sessiondeet", req.session.currentUser)
+    if (req.session.currentUser === true) {
         return next()
     } else {
         console.log("Not admin!")

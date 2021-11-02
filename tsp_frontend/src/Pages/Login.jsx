@@ -28,7 +28,6 @@ function Login({ auth, setAuth, setRole }) {
           if (res.data.role === "Admin") {
               setRole("Admin");
           }
-        
         }
       })
       .catch((err) => {
