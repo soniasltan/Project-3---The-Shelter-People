@@ -41,6 +41,9 @@ function NavBar() {
         <LinkStyled to="/about" className="about">
           <Li>About</Li>
         </LinkStyled>
+        <LinkStyled to="/users/new" className="signup">
+          <Li>Signup</Li>
+        </LinkStyled>
         <LinkStyled to="/login" className="login">
           <Li>Login</Li>
         </LinkStyled>
