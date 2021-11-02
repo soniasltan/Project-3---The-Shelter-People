@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Label = styled.label`
-    margin: 5px;
+  margin: 5px;
 `;
 
 function CatsUpdate() {
@@ -58,67 +58,69 @@ function CatsUpdate() {
     // const cage = inputCatCage;
 
     // const catDetail = { name, description, image, gender, adoptable, cage };
-      await axios.put(`http://localhost:3000/api/cats/${catDetail._id}`, catDetail)
-      history.push(`/cats/list`);
-      };
+    await axios.put(
+      `http://localhost:3000/api/cats/${catDetail._id}`,
+      catDetail
+    );
+    history.push(`/cats/list`);
+  };
 
-// await axios.put(`http://localhost:3000/api/cats/${catDetail._id}`, catDetail)
-// .then((res) => {
-//   window.alert(`Cat updated successfully!`);
-//   history.push(`/cats/list`);
-// });
-// };
-// }
+  // await axios.put(`http://localhost:3000/api/cats/${catDetail._id}`, catDetail)
+  // .then((res) => {
+  //   window.alert(`Cat updated successfully!`);
+  //   history.push(`/cats/list`);
+  // });
+  // };
+  // }
 
   return (
     <>
       <h1>Update Cat Details</h1>
       <form>
-      <Label>Name:</Label>
-      <input
-        type="text"
-        placeholder="name"
-        value={catDetail.name}
-        onChange={changeName}
-      />
-      <Label>Description:</Label>
-      <input
-        type="textarea"
-        placeholder="description" size="2em"
-        value={catDetail.description}
-        onChange={changeDescription}
-      />
-      <Label>Image:</Label>
-      <input
-        type="text"
-        placeholder="imageURL"
-        value={catDetail.image}
-      />
-      <Label>Gender:</Label>
-      <select value={catDetail.gender}>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Unknown">Unknown</option>
-      </select>
-      <Label>Adopt:</Label>
-      <select value={catDetail.adoptable}>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
-      <Label>Cage:</Label>
-      <select value={catDetail.cage}>
-        <option value="6/7">6/7</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-      </select>
-      <button type="submit" onClick={handleUpdate} value="Update Cat">Update Cat</button>
-      <button href={'/cats/list'}>Cancel</button>
+        <Label>Name:</Label>
+        <input
+          type="text"
+          placeholder="name"
+          value={catDetail.name}
+          onChange={changeName}
+        />
+        <Label>Description:</Label>
+        <input
+          type="textarea"
+          placeholder="description"
+          size="2em"
+          value={catDetail.description}
+          onChange={changeDescription}
+        />
+        <Label>Image:</Label>
+        <input type="text" placeholder="imageURL" value={catDetail.image} />
+        <Label>Gender:</Label>
+        <select value={catDetail.gender}>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Unknown">Unknown</option>
+        </select>
+        <Label>Adopt:</Label>
+        <select value={catDetail.adoptable}>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+        <Label>Cage:</Label>
+        <select value={catDetail.cage}>
+          <option value="6/7">6/7</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <button type="submit" onClick={handleUpdate} value="Update Cat">
+          Update Cat
+        </button>
+        <button href={"/cats/list"}>Cancel</button>
       </form>
-      </>
+    </>
   );
 }
 
