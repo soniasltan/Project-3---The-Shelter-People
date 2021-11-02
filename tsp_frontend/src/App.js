@@ -33,7 +33,6 @@ function App() {
         <Switch>
           <Route path="/login">
             <Login
-              auth={auth}
               setAuth={setAuth}
               setRole={setRole}
               setUsername={setUsername}
