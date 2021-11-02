@@ -7,6 +7,9 @@ const LinkStyled = styled(Link)`
   text-decoration: none;
   color: black;
 `;
+const Img = styled.img`
+  border-radius: 50%;
+`;
 function CatsList() {
   // For the cat data
   const [cats, setCats] = useState([]);
@@ -32,18 +35,27 @@ function CatsList() {
 
   return (
     <div>
-      <p>Cats</p>
+      <h1>Cats</h1>
       {cats.map((element) => {
         return (
           <>
-            <p key={element._id}>
-              <LinkStyled to={`/cats/${element._id}`}>
+            <div class="cats">
+              <p key={element._id}>
+                <LinkStyled to={`/cats/${element._id}`}>
+                  <Img
+                    src={element.image}
+                    alt={element.name}
+                    width="100px"
+                    height="100px"
+                  />
+                </LinkStyled>
+                <br />
                 {element.name}
-              </LinkStyled>
-              <br />
-              <button onClick={() => deleteCat(element._id)}>X</button>
-              <button onClick={() => updateCat(element._id)}>update</button>
-            </p>
+                <br />
+                <button onClick={() => deleteCat(element._id)}>X</button>
+                <button onClick={() => updateCat(element._id)}>update</button>
+              </p>
+            </div>
           </>
         );
       })}
