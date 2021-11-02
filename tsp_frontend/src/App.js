@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
@@ -10,14 +10,17 @@ import CatsUpdate from "./Pages/CatsUpdate";
 import CatsCreate from "./Pages/CatsCreate";
 import AuthCatShow from "./Pages/AuthCatShow";
 import CatShow from "./Pages/CatShow";
-import Login from "./Pages/Login"
-import UserCreate from "./Pages/UserCreate"
+import Login from "./Pages/Login";
+import UserCreate from "./Pages/UserCreate";
 
 function App() {
+  const [auth, setAuth] = useState("NoAuth");
+  const [role, setRole] = useState("Guest");
+  const [username, setUsername] = useState("");
   return (
     <div className="App">
       <Router>
-        <NavBar />
+        <NavBar role={role} />
         <Route exact path="/">
           <Home />
         </Route>
@@ -28,18 +31,26 @@ function App() {
           <Contact />
         </Route>
         <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/users/new">
-          <UserCreate />
-        </Route>
+          <Route path="/login">
+            <Login
+              auth={auth}
+              setAuth={setAuth}
+              setRole={setRole}
+              setUsername={setUsername}
+            />
+          </Route>
+          <Route path="/users/new">
+            <UserCreate />
+          </Route>
           <Route path="/cats/list">
             <CatsList />
           </Route>
-          <Route path="/cats/new">
-            <CatsCreate />
-          </Route>
+          {/* ?? if first one is undef, take the second */}
+          {role === "Admin" && (
+            <Route path="/cats/new">
+              <CatsCreate />
+            </Route>
+          )}
           <Route path="/cats/edit/:id">
             <CatsUpdate />
           </Route>
