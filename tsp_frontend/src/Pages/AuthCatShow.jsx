@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkStyled = styled(Link)`
@@ -13,9 +13,14 @@ const Img = styled.img`
 
 function AuthCatShow() {
   let id = useParams();
+  let history = useHistory();
   // For the cat data
   const [cat, setCat] = useState();
   const [toggle, setToggle] = useState(false);
+  // handle function to return user to cat list page
+  const catListPage = () => {
+    history.push(`/cats/list`);
+  };
   // handle function for adding comment
   const handleComment = (event) => {
     event.preventDefault();
@@ -72,9 +77,7 @@ function AuthCatShow() {
         <p>Gender: {cat?.gender}</p>
         <p>Adoptable: {cat?.adoptable}</p>
         <p>Cage: {cat?.cage}</p>
-        <button>
-          <LinkStyled to={`/cats/list`}> Back </LinkStyled>
-        </button>
+        <button onClick={() => catListPage()}>Back</button>
       </div>
       <div>
         <h3>Comments</h3>
