@@ -1,19 +1,18 @@
-import React, { useRef } from "react";
-import { useParams, useState } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 //Change to Controlled Form to repopulate the value
-//onchange
 
 function CatsUpdate() {
-  let id = useParams();
+  const { id } = useParams();
   const [catDetail, setCatDetail] = useState("");
   const [inputCatName, setInputCatName] = useState("");
-  const inputCatDescription = useRef();
-  const inputCatImage = useRef();
-  const inputCatGender = useRef();
-  const inputCatAdopt = useRef();
-  const inputCatCage = useRef();
+  const [inputCatDescription, setInputCatDescription] = useState("");
+  const [inputCatImage, setInputCatImage] = useState("");
+  const [inputCatGender, setInputCatGender] = useState("");
+  const [inputCatAdopt, setInputCatAdopt] = useState("");
+  const [inputCatCage, setInputCatCage] = useState("");
 
   // get the cat data for the update form
   useEffect(() => {
@@ -26,17 +25,17 @@ function CatsUpdate() {
   }, []);
 
   const handleUpdate = async () => {
-    const name = inputCatName.current.value;
-    const description = inputCatDescription.current.value;
-    const image = inputCatImage.current.value;
-    const gender = inputCatGender.current.value;
-    const adoptable = inputCatAdopt.current.value;
-    const cage = inputCatCage.current.value;
+    const name = inputCatName;
+    const description = inputCatDescription;
+    const image = inputCatImage;
+    const gender = inputCatGender;
+    const adoptable = inputCatAdopt;
+    const cage = inputCatCage;
 
     const payload = { name, description, image, gender, adoptable, cage };
 
     await axios
-      .put(`http://localhost:3000/api/cats/${id.id}`, payload)
+      .put(`http://localhost:3000/api/cats/${id._id}`, payload)
       .then((res) => {
         window.alert(`Cat updated successfully!`);
       });
@@ -46,7 +45,7 @@ function CatsUpdate() {
     <div>
       <p>In this page you'll see the form to update a cat</p>
       <label>name:</label>
-      <input type="text" value={catDetail.name} onChange={}/>
+      <input type="text" value={catDetail.name} />
       <label>description:</label>
       <input type="text" ref={inputCatDescription} />
       <label>image:</label>

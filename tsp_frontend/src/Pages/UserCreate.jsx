@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import {useHistory} from "react-router-dom"
 import axios from "axios"
 
 const addUser = async (user) => {
@@ -8,6 +9,7 @@ const addUser = async (user) => {
 
 function UserCreate() {
     const [user, setUser] = useState({})
+    const history = useHistory()
 
     const handleEmailChange = (event) => {
         const value = event.target.value
@@ -31,7 +33,7 @@ function UserCreate() {
         } else {
         addUser(user)
         alert(`New user ${user.username} created successfully!`)
-        
+        history.push("/login")
         }
     }
 

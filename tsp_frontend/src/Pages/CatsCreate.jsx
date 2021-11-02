@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function CatsCreate() {
+  let history = useHistory();
   ///////////////////////// useRef for uncontrolled form //////////////////////////////////
   const inputCatName = useRef();
   const inputCatDescription = useRef();
@@ -25,6 +27,7 @@ function CatsCreate() {
     const catInformation = { name, description, image, gender, adoptable, cage };
     await axios.post(`http://localhost:3000/api/cats/`, catInformation).then((res) => {
       window.alert(`Cat created successfully!`);
+      history.push(`/cats/list`);
     });
   };
 
