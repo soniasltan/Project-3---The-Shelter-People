@@ -17,7 +17,12 @@ function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         console.log("login", login)
-        await axios.post(`http://localhost:3000/api/login`, login)
+        const data = await axios.get(`http://localhost:3000/api/login`, login)
+        if (data.status === 200) {
+            this.props.history.push("/")
+        } else {
+            alert("Bad login")
+        }
     }
 
     return (
