@@ -25,17 +25,15 @@ function CatsUpdate() {
   }, []);
 
   const handleUpdate = async () => {
-    const name = inputCatName;
-    const description = inputCatDescription;
-    const image = inputCatImage;
-    const gender = inputCatGender;
-    const adoptable = inputCatAdopt;
-    const cage = inputCatCage;
-
-    const payload = { name, description, image, gender, adoptable, cage };
-
     await axios
-      .put(`http://localhost:3000/api/cats/${id._id}`, payload)
+      .put(`http://localhost:3000/api/cats/${id._id}`, {
+        inputCatName,
+        inputCatDescription,
+        inputCatImage,
+        inputCatGender,
+        inputCatAdopt,
+        inputCatCage,
+      })
       .then((res) => {
         window.alert(`Cat updated successfully!`);
       });
@@ -44,25 +42,40 @@ function CatsUpdate() {
   return (
     <div>
       <p>In this page you'll see the form to update a cat</p>
-      <label>name:</label>
-      <input type="text" value={catDetail.name} />
+      <label>Name:</label>
+      <input
+        type="text"
+        placeholder="name"
+        value={inputCatName.name}
+        onChange={(e) => setInputCatName(e.target.value)}
+      />
       <label>description:</label>
-      <input type="text" ref={inputCatDescription} />
+      <input
+        type="text"
+        placeholder="description"
+        value={inputCatDescription.description}
+        onChange={(e) => setInputCatDescription(e.target.value)}
+      />
       <label>image:</label>
-      <input type="text" ref={inputCatImage} />
+      <input
+        type="text"
+        placeholder="imageURL"
+        value={inputCatImage.image}
+        onChange={(e) => setInputCatImage(e.target.value)}
+      />
       <label>gender:</label>
-      <select ref={inputCatGender}>
+      <select value={inputCatGender.gender} >
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Unknown">Unknown</option>
       </select>
       <label>adopt:</label>
-      <select ref={inputCatAdopt}>
+      <select value={inputCatAdopt.adoptable}>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
       <label>cage:</label>
-      <select ref={inputCatCage}>
+      <select value={inputCatCage.cage}>
         <option value="6/7">6/7</option>
         <option value="2">2</option>
         <option value="3">3</option>
