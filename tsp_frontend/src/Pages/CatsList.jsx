@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const LinkStyled = styled(Link)`
@@ -10,6 +10,7 @@ const LinkStyled = styled(Link)`
 function CatsList() {
   // For the cat data
   const [cats, setCats] = useState([]);
+  let history = useHistory();
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatsData() {
@@ -22,10 +23,11 @@ function CatsList() {
 
   const deleteCat = (id) => {
     axios.delete(`http://localhost:3000/api/cats/${id}`);
+    history.push(`/cats/list`);
   };
 
   const updateCat = (id) => {
-    window.location.href = `/cats/update/${id}`;
+    history.push(`/cats/edit/${id}`);
   };
 
   return (
