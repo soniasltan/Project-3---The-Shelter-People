@@ -26,6 +26,7 @@ function CatsList({ role }) {
 
   const deleteCat = (id) => {
     axios.delete(`http://localhost:3000/api/cats/${id}`);
+    window.alert(`Goodbye cat :(`);
     history.push(`/`);
   };
 

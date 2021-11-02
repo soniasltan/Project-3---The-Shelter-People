@@ -21,7 +21,6 @@ function Login({ setAuth, setRole, setUsername }) {
     await axios
       .post(`http://localhost:3000/api/login`, login)
       .then((res) => {
-        console.log(res);
         if (res.data.success === true) {
           setAuth("Auth");
           setUsername(res.data.username);
@@ -33,7 +32,9 @@ function Login({ setAuth, setRole, setUsername }) {
       })
       .catch((err) => {
         console.log("err", err);
-        alert(`Sorry, login failed! If you do not have an account, please sign up for one.`);
+        alert(
+          `Sorry, login failed! If you do not have an account, please sign up for one.`
+        );
       });
   };
 
