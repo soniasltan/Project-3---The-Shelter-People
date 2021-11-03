@@ -1,8 +1,7 @@
 # Project 3: The Shelter People
 
 Animal Shelter Website for TheShelterPeople.
-
-<!-- ##### ============Website:  ================ -->
+Visit the website here: https://theshelterpeople.herokuapp.com/
 
 ## Description
 We want to create a useful app that would be of help for the shelter volunteers (volunteer group at Animal Lodge @ sungei tengah).
@@ -28,14 +27,13 @@ a.	Admin: login page for admin to edit/add/delete pages (cats+blog). Only admin 
 - Axios
 - Styled Components
 - @react-google-maps/api
-- react-instagram-embed
+- React-instagram-embed
 - MongoDB
 - Express
 - Express-sessions
 - NodeJS
-- dotenv
-- bcrypt
-
+- Dotenv
+- Bcrypt
 ```
 ### MVP
 User-facing page showing cats + about + contact info (no authentication required to view)
