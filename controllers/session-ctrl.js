@@ -37,8 +37,10 @@ const createSession = async (req, res) => {
       return res.status(400).json({ success: false, error: err });
     }
     // user exists. Check if passwords match.
-    if (bcrypt.compareSync(req.body.password, user.password)) {
+    if ( await bcrypt.compareSync(req.body.password, user.password)) {
+      console.log("session", req.session)
       req.session.currentUser = user;
+      console.log("session user", req.session.currentUser)
       // success!
       res.status(201).json({
         success: true,
