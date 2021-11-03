@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan&display=swap");
+
 html {
   cursor: url(https://cur.cursors-4u.net/nature/nat-3/nat260.cur), auto;
 }
-
+body {
+  font-family: "Spartan", sans-serif;
+}
 .App {
   display: flex;
   flex-direction: column;
@@ -10,6 +14,3 @@ html {
   color: black;
 }
 
-div.cats {
-  display: inline-flex;
-}

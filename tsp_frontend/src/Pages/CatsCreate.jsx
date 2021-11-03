@@ -1,6 +1,62 @@
 import React, { useRef } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+
+const Label = styled.label`
+  margin: 5px;
+`;
+
+const Input = styled.input`
+font-family: "Spartan", sans-serif;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position:relative;
+}
+  }
+`;
+
+const Select = styled.select`
+  margin: 5px;
+  cursor: pointer;
+  font-family: "Spartan", sans-serif;
+`;
+
+const Button = styled.button`
+font-family: "Spartan", sans-serif;
+  padding: 10px;
+  margin: 6px 2px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #EFBE93;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+  }
+  &:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  &:active {
+    background-color: grey};
+  }
+`;
 
 function CatsCreate({ role, auth }) {
   let history = useHistory();
@@ -32,12 +88,10 @@ function CatsCreate({ role, auth }) {
         cage,
       };
       console.log(catInformation);
-      await axios
-        .post(`/api/cats/`, catInformation)
-        .then((res) => {
-          window.alert(`Cat created successfully!`);
-          history.push(`/cats/list`);
-        });
+      await axios.post(`/api/cats/`, catInformation).then((res) => {
+        window.alert(`Cat created successfully!`);
+        history.push(`/cats/list`);
+      });
     } else {
       window.alert(`Sorry, only Admin can create cats!`);
       history.push(`/cats/list`);
@@ -51,32 +105,32 @@ function CatsCreate({ role, auth }) {
 
   return (
     <>
-    <h1>Create New Cat</h1>
+      <h1>Create New Cat</h1>
       <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input type="text" ref={inputCatName} minLength="2" />
+        <Label>Name:</Label>
+        <Input type="text" ref={inputCatName} minLength="2" />
         <br />
-        <label>Description:</label>
-        <input type="text" ref={inputCatDescription} minLength="1" />
+        <Label>Description:</Label>
+        <Input type="text" ref={inputCatDescription} minLength="1" />
         <br />
-        <label>Image url:</label>
-        <input type="url" ref={inputCatImage} minLength="5" />
+        <Label>Image url:</Label>
+        <Input type="url" ref={inputCatImage} minLength="5" />
         <br />
-        <label>Gender:</label>
-        <select ref={inputCatGender}>
+        <Label>Gender:</Label>
+        <Select ref={inputCatGender}>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Unknown">Unknown</option>
-        </select>
+        </Select>
         <br />
-        <label>Adoptable:</label>
-        <select ref={inputCatAdopt}>
+        <Label>Adoptable:</Label>
+        <Select ref={inputCatAdopt}>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
-        </select>
+        </Select>
         <br />
-        <label>Cage:</label>
-        <select ref={inputCatCage}>
+        <Label>Cage:</Label>
+        <Select ref={inputCatCage}>
           <option value="6/7">6/7</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -84,11 +138,11 @@ function CatsCreate({ role, auth }) {
           <option value="5">5</option>
           <option value="8">8</option>
           <option value="9">9</option>
-        </select>
+        </Select>
         <br />
-        <button>Create New Cat</button>
+        <Button>Create New Cat</Button>
         <br />
-        <button onClick={handleCancel}>Cancel</button>
+        <Button onClick={handleCancel}>Cancel</Button>
       </form>
     </>
   );

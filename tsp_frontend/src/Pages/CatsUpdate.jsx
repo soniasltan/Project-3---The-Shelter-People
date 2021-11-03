@@ -7,6 +7,57 @@ const Label = styled.label`
   margin: 5px;
 `;
 
+const Input = styled.input`
+font-family: "Spartan", sans-serif;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position:relative;
+}
+  }
+`;
+
+const Select = styled.select`
+  margin: 5px;
+  cursor: pointer;
+  font-family: "Spartan", sans-serif;
+`;
+
+const Button = styled.button`
+font-family: "Spartan", sans-serif;
+  padding: 10px;
+  margin: 6px 2px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #EFBE93;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+  }
+  &:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  &:active {
+    background-color: grey};
+  }
+`;
+
 function CatsUpdate({ role, auth }) {
   const history = useHistory();
   const { id } = useParams();
@@ -42,15 +93,13 @@ function CatsUpdate({ role, auth }) {
     setUpdateCatDetail({ ...updateCatDetail, [name]: event.target.value });
   };
 
-  // update on clicking update button
+  // update on clicking update Button
   const handleUpdate = async (event) => {
     event.preventDefault();
     if (role === "Admin" && auth === "Auth") {
-      await axios
-        .put(`/api/cats/${id}`, updateCatDetail)
-        .then((res) => {
-          window.alert(`Cat updated successfully!`);
-        });
+      await axios.put(`/api/cats/${id}`, updateCatDetail).then((res) => {
+        window.alert(`Cat updated successfully!`);
+      });
       history.push(`/cats/list`);
     } else {
       window.alert(`Sorry, only Admin can update cats!`);
@@ -63,7 +112,7 @@ function CatsUpdate({ role, auth }) {
       <h1>Update Cat Details</h1>
       <form onSubmit={handleUpdate}>
         <Label>Name:</Label>
-        <input
+        <Input
           type="text"
           name="name"
           minLength="2"
@@ -72,7 +121,7 @@ function CatsUpdate({ role, auth }) {
         />
         <br />
         <Label>Description:</Label>
-        <input
+        <Input
           type="textarea"
           name="description"
           minLength="1"
@@ -82,7 +131,7 @@ function CatsUpdate({ role, auth }) {
         />
         <br />
         <Label>Image url:</Label>
-        <input
+        <Input
           type="text"
           name="image"
           minLength="5"
@@ -91,26 +140,26 @@ function CatsUpdate({ role, auth }) {
         />
         <br />
         <Label>Gender:</Label>
-        <select name="gender" onChange={(event) => handleChange(event)}>
+        <Select name="gender" onChange={(event) => handleChange(event)}>
           <option value={updateCatDetail.gender} selected disabled hidden>
             {updateCatDetail.gender}
           </option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Unknown">Unknown</option>
-        </select>
+        </Select>
         <br />
         <Label>Adoptable:</Label>
-        <select name="adoptable" onChange={(event) => handleChange(event)}>
+        <Select name="adoptable" onChange={(event) => handleChange(event)}>
           <option value={updateCatDetail.adoptable} selected disabled hidden>
             {updateCatDetail.adoptable}
           </option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
-        </select>
+        </Select>
         <br />
         <Label>Cage:</Label>
-        <select name="cage" onChange={(event) => handleChange(event)}>
+        <Select name="cage" onChange={(event) => handleChange(event)}>
           <option value={updateCatDetail.cage} selected disabled hidden>
             {updateCatDetail.cage}
           </option>
@@ -121,13 +170,13 @@ function CatsUpdate({ role, auth }) {
           <option value="5">5</option>
           <option value="8">8</option>
           <option value="9">9</option>
-        </select>
+        </Select>
         <br />
-        <button type="submit" value="Update Cat">
+        <Button type="submit" value="Update Cat">
           Update Cat
-        </button>
+        </Button>
         <br />
-        <button href={"/cats/list"}>Cancel</button>
+        <Button href={"/cats/list"}>Cancel</Button>
       </form>
     </>
   );
