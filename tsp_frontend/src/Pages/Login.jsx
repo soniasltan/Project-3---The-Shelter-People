@@ -1,6 +1,56 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
+
+const Label = styled.label`
+  margin: 5px;
+`;
+
+const Input = styled.input`
+font-family: "Spartan", sans-serif;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position:relative;
+}
+  }
+`;
+
+const Button = styled.button`
+font-family: "Spartan", sans-serif;
+  padding: 10px;
+  margin: 6px 2px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #EFBE93;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+  }
+  &:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  &:active {
+    background-color: grey};
+  }
+`;
 
 function Login({ setAuth, setRole, setUsername }) {
   const [login, setLogin] = useState({});
@@ -42,26 +92,26 @@ function Login({ setAuth, setRole, setUsername }) {
     <>
       <h1>Login</h1>
       <form>
-        <label>
+        <Label>
           Username:
-          <input
+          <Input
             type="text"
             name="username"
             value={login.username}
             onChange={handleUsernameChange}
-          ></input>
-        </label>
-        <label>
+          ></Input>
+        </Label>
+        <Label>
           Password:
-          <input
+          <Input
             type="password"
             name="password"
             value={login.password}
             onChange={handlePasswordChange}
             minlength="6"
-          ></input>
-        </label>
-        <input type="submit" onClick={handleSubmit} value="Submit" />
+          ></Input>
+        </Label>
+        <Button type="submit" onClick={handleSubmit} >Submit</Button>
       </form>
     </>
   );
