@@ -7,106 +7,113 @@ const Label = styled.label`
   margin: 5px;
 `;
 
-function CatsUpdate() {
+function CatsUpdate({ role, auth }) {
   const history = useHistory();
   const { id } = useParams();
+  const [updateCatDetail, setUpdateCatDetail] = useState({
+    name: "",
+    description: "",
+    image: "",
+    gender: "",
+    cage: "",
+    adoptable: "",
+  });
 
-  const [catDetail, setCatDetail] = useState({});
-  // const [inputCatName, setInputCatName] = useState("");
-  // const [inputCatDescription, setInputCatDescription] = useState("");
-  // const [inputCatImage, setInputCatImage] = useState("");
-  // const [inputCatGender, setInputCatGender] = useState("");
-  // const [inputCatAdopt, setInputCatAdopt] = useState("");
-  // const [inputCatCage, setInputCatCage] = useState("");
-
-  // get the cat data for the update forms
+  // get the cat data for the update form to prepopulate the values
   useEffect(() => {
-    const getCatData = async (id) => {
-      const url = `http://localhost:3000/api/cats/${id}`;
-      const catData = await axios.get(url);
-      setCatDetail(catData);
-    };
-    getCatData(id);
-  }, [id]);
+    async function getCatData() {
+      await axios.get(`http://localhost:3000/api/cats/${id}`).then((cat) => {
+        setUpdateCatDetail({
+          gender: cat.data.data.gender,
+          name: cat.data.data.name,
+          description: cat.data.data.description,
+          image: cat.data.data.image,
+          adoptable: cat.data.data.adoptable,
+          cage: cat.data.data.cage,
+        });
+      });
+    }
+    getCatData();
+  }, []);
 
-  // useEffect(() => {
-  //   async function getCatData() {
-  //     await axios.get(`http://localhost:3000/api/cats/${id}`).then((cat) => {
-  //       setCatDetail(cat.data.data);
-  //     });
-  //   }
-  //   getCatData();
-  // }, []);
-
-  const changeName = (event) => {
-    const value = event.target.value;
-    setCatDetail({ ...catDetail, Name: value });
+  //for every change in cat details, update the state
+  const handleChange = (event) => {
+    const name = event.target.name;
+    setUpdateCatDetail({ ...updateCatDetail, [name]: event.target.value });
   };
 
-  const changeDescription = (event) => {
-    const value = event.target.value;
-    setCatDetail({ ...catDetail, Description: value });
-  };
-
+  // update on clicking update button
   const handleUpdate = async (event) => {
     event.preventDefault();
-    // const name = inputCatName;
-    // const description = inputCatDescription;
-    // const image = inputCatImage;
-    // const gender = inputCatGender;
-    // const adoptable = inputCatAdopt;
-    // const cage = inputCatCage;
-
-    // const catDetail = { name, description, image, gender, adoptable, cage };
-    await axios.put(
-      `http://localhost:3000/api/cats/${catDetail._id}`,
-      catDetail
-    );
-    history.push(`/cats/list`);
+    if (role === "Admin" && auth === "Auth") {
+      await axios
+        .put(`http://localhost:3000/api/cats/${id}`, updateCatDetail)
+        .then((res) => {
+          window.alert(`Cat updated successfully!`);
+        });
+      history.push(`/cats/list`);
+    } else {
+      window.alert(`Sorry, only Admin can update cats!`);
+      history.push(`/cats/list`);
+    }
   };
-
-  // await axios.put(`http://localhost:3000/api/cats/${catDetail._id}`, catDetail)
-  // .then((res) => {
-  //   window.alert(`Cat updated successfully!`);
-  //   history.push(`/cats/list`);
-  // });
-  // };
-  // }
 
   return (
     <>
       <h1>Update Cat Details</h1>
-      <form>
+      <form onSubmit={handleUpdate}>
         <Label>Name:</Label>
         <input
           type="text"
-          placeholder="name"
-          value={catDetail.name}
-          onChange={changeName}
+          name="name"
+          minLength="2"
+          value={updateCatDetail.name}
+          onChange={(event) => handleChange(event)}
         />
+        <br />
         <Label>Description:</Label>
         <input
           type="textarea"
-          placeholder="description"
+          name="description"
+          minLength="1"
           size="2em"
-          value={catDetail.description}
-          onChange={changeDescription}
+          value={updateCatDetail.description}
+          onChange={(event) => handleChange(event)}
         />
-        <Label>Image:</Label>
-        <input type="text" placeholder="imageURL" value={catDetail.image} />
+        <br />
+        <Label>Image url:</Label>
+        <input
+          type="text"
+          name="image"
+          minLength="5"
+          value={updateCatDetail.image}
+          onChange={(event) => handleChange(event)}
+        />
+        <br />
         <Label>Gender:</Label>
-        <select value={catDetail.gender}>
+        <select name="gender" onChange={(event) => handleChange(event)}>
+          <option value={updateCatDetail.gender} selected disabled hidden>
+            {updateCatDetail.gender}
+          </option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Unknown">Unknown</option>
         </select>
-        <Label>Adopt:</Label>
-        <select value={catDetail.adoptable}>
+        <br />
+        <Label>Adoptable:</Label>
+        <select name="adoptable" onChange={(event) => handleChange(event)}>
+          <option value={updateCatDetail.adoptable} selected disabled hidden>
+            {updateCatDetail.adoptable}
+          </option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </select>
+        <br />
         <Label>Cage:</Label>
-        <select value={catDetail.cage}>
+        <select name="cage" onChange={(event) => handleChange(event)}>
+          <option value={updateCatDetail.cage} selected disabled hidden>
+            {updateCatDetail.cage}
+          </option>
           <option value="6/7">6/7</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -115,9 +122,11 @@ function CatsUpdate() {
           <option value="8">8</option>
           <option value="9">9</option>
         </select>
-        <button type="submit" onClick={handleUpdate} value="Update Cat">
+        <br />
+        <button type="submit" value="Update Cat">
           Update Cat
         </button>
+        <br />
         <button href={"/cats/list"}>Cancel</button>
       </form>
     </>
