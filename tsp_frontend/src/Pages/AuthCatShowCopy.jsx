@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
-import MDEditor from "@uiw/react-md-editor";
 
 const Img = styled.img`
   border-radius: 50%;
@@ -14,7 +13,6 @@ function AuthCatShow({ userName, role }) {
   // For the cat data
   const [cat, setCat] = useState();
   const [toggle, setToggle] = useState(false);
-  const [value, setValue] = useState("");
   // handle function to return user to cat list page
   const catListPage = () => {
     history.push(`/cats/list`);
@@ -23,15 +21,17 @@ function AuthCatShow({ userName, role }) {
   const handleComment = (event) => {
     event.preventDefault();
     setToggle(!toggle);
-    let text = value;
+    let text = event.target[0].value;
     let cat_id = id.id;
     let user_id = userName;
     let username = userName;
 
     const payload = { text, cat_id, user_id, username };
-    axios.post(`/api/cats/${id.id}/newcomment`, payload).then((res) => {
-      window.alert(`Comment added!`);
-    });
+    axios
+      .post(`/api/cats/${id.id}/newcomment`, payload)
+      .then((res) => {
+        window.alert(`Comment added!`);
+      });
   };
 
   // handle function for updating comment
@@ -62,7 +62,7 @@ function AuthCatShow({ userName, role }) {
       });
     }
     getCatData();
-  }, []);
+  }, [updateComment]);
 
   return (
     <>
@@ -81,40 +81,40 @@ function AuthCatShow({ userName, role }) {
           return (
             <>
               <p key={element._id}>
-                <hr />
-                <MDEditor.Markdown
-                  source={`**` + element.username + `** *commented:*`}
-                />
-                <MDEditor.Markdown source={element.text} />
-                {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
-                {role === "Admin" && (
-                  <>
-                    <button onClick={() => updateComment(element._id)}>
-                      &#9998; Edit
-                    </button>
-                    <button onClick={() => deleteComment(element._id)}>
-                      &#128465; Del
-                    </button>
-                  </>
-                )}
-                {element.username === userName && role === "Guest" && (
-                  <>
-                    <button onClick={() => updateComment(element._id)}>
-                      &#9998;
-                    </button>
-                    <button onClick={() => deleteComment(element._id)}>
-                      &#128465;
-                    </button>
-                  </>
-                )}
+                <p>
+                  <hr />
+                  {element.text}
+                  {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
+                  {role === "Admin" && (
+                    <>
+                      <button onClick={() => updateComment(element._id)}>
+                        &#9998;
+                      </button>
+                      <button onClick={() => deleteComment(element._id)}>
+                        &#128465;
+                      </button>
+                    </>
+                  )}
+                  {element.username === userName && role === "Guest" && (
+                    <>
+                      <button onClick={() => updateComment(element._id)}>
+                        &#9998;
+                      </button>
+                      <button onClick={() => deleteComment(element._id)}>
+                        &#128465;
+                      </button>
+                    </>
+                  )}
+                </p>
                 <br />
+                <p>Posted by: {element.username}</p>
                 <hr />
               </p>
             </>
           );
         })}
         <form onSubmit={handleComment}>
-          <MDEditor value={value} onChange={setValue} />
+          <input type="text" minLength="3" />
           <button>Add comment</button>
         </form>
       </div>
