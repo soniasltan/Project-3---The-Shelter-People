@@ -7,7 +7,7 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
-function AuthCatShow() {
+function AuthCatShow({ userName, role }) {
   let id = useParams();
   let history = useHistory();
   // For the cat data
@@ -23,10 +23,10 @@ function AuthCatShow() {
     setToggle(!toggle);
     let text = event.target[0].value;
     let cat_id = id.id;
-    let user_id = id.id;
-    let email = id.id;
+    let user_id = userName;
+    let username = userName;
 
-    const payload = { text, cat_id, user_id, email };
+    const payload = { text, cat_id, user_id, username };
     axios
       .post(`http://localhost:3000/api/cats/${id.id}/newcomment`, payload)
       .then((res) => {
@@ -82,16 +82,32 @@ function AuthCatShow() {
             <>
               <p key={element._id}>
                 <p>
+                <hr/>
                   {element.text}
-                  <button onClick={() => updateComment(element._id)}>
-                    &#9998;
-                  </button>
-                  <button onClick={() => deleteComment(element._id)}>
-                    &#128465;
-                  </button>
+                  {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
+                  {role === "Admin" && (
+                    <>
+                      <button onClick={() => updateComment(element._id)}>
+                        &#9998;
+                      </button>
+                      <button onClick={() => deleteComment(element._id)}>
+                        &#128465;
+                      </button>
+                    </>
+                  )}
+                  {element.username === userName && (
+                    <>
+                      <button onClick={() => updateComment(element._id)}>
+                        &#9998;
+                      </button>
+                      <button onClick={() => deleteComment(element._id)}>
+                        &#128465;
+                      </button>
+                    </>
+                  )}
                 </p>
                 <br />
-                <p>Posted by: {element.email}</p>
+                <p>Posted by: {element.username}</p><hr/>
               </p>
             </>
           );
