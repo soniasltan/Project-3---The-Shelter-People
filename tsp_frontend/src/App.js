@@ -17,6 +17,7 @@ import CatsCreate from "./Pages/CatsCreate";
 import CatShow from "./Pages/CatShow";
 import CatsList from "./Pages/CatsList";
 import CatsUpdate from "./Pages/CatsUpdate";
+import CommentUpdate from "./Pages/CommentUpdate";
 import Login from "./Pages/Login";
 import UserCreate from "./Pages/UserCreate";
 
@@ -77,6 +78,9 @@ function App() {
             ) : (
               <CatShow />
             )}
+          </Route>
+          <Route path="/comments/edit/:id">
+            <CommentUpdate />
           </Route>
           <Route>
             <Redirect to="/" />

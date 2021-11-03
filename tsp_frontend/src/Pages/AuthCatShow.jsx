@@ -36,16 +36,7 @@ function AuthCatShow({ userName, role }) {
 
   // handle function for updating comment
   const updateComment = async (id) => {
-    setToggle(!toggle);
-    let updateCommentText = prompt("Update the comment:");
-
-    await axios
-      .put(`/api/comments/${id}`, {
-        text: updateCommentText,
-      })
-      .then((res) => {
-        window.alert(`Comment updated!`);
-      });
+    history.push(`/comments/edit/${id}`);
   };
 
   // handle function for deleting comment
