@@ -112,7 +112,7 @@ function Home() {
           <HeroContentText>
             <HeroTitle>
               <HeroTitleText>
-                Sharing love and support for animals. Join our journey here.
+                Join us on our journey to share love and support for animals!
               </HeroTitleText>
             </HeroTitle>
             <HeroText>
