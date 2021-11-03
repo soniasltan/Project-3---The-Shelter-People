@@ -65,19 +65,13 @@ To use the app, user should:
 ---
 
 ### General Approach / Problem-Solving Strategy
-Our plan is to have 3 models: cats, comments, and users.
+Our general approach is to divide and conquer. Work is split into components and pair programming method was initialised.
 
-Cats model (for CRUD): id, name, cage, image, description, adoptable, gender.
-Comments model: id, user id, text, cat id, timestamp.
-User model: id, username, email, password, role.
+Starting with the express backend - we configured the server side by connecting Node.js and Express to MongoDB on the backend. Our models, controllers and mongoDB was set up and we moved on to set up the database.
 
-Starting with the express backend - our models, controllers and mongoDB was set up.
+After that, we started building the frontend, using React to build our user interfaces.
 
-
-
-### Unsolved problems
-
-Unsolved problems here...
+Once these are completed, we connected the frontend to the backend.
 
 ## Installation instructions for dependencies
 <!-- Fill up as the project goes along... -->
