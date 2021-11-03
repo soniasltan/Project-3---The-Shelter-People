@@ -22,7 +22,7 @@ function App() {
   const history = useHistory();
   // handle function for logging out, passed as props to navbar
   const handleLogOut = async (event) => {
-    await axios.delete(`http://localhost:3000/api/login`);
+    await axios.delete(`/api/login`);
     setAuth("NoAuth");
     setRole("Guest");
     setUsername("");
