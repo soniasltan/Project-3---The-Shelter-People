@@ -61,10 +61,10 @@ function App() {
             <CatsList role={role} />
           </Route>
           <Route path="/cats/new">
-            <CatsCreate />
+            <CatsCreate role={role} auth={auth} />
           </Route>
           <Route path="/cats/edit/:id">
-            <CatsUpdate />
+            <CatsUpdate role={role} auth={auth} />
           </Route>
           <Route path="/cats/:id">
             {auth === "Auth" ? (
