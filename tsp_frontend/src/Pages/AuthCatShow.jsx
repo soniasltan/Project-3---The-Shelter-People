@@ -67,7 +67,7 @@ function AuthCatShow({ userName, role }) {
         <button onClick={() => catListPage()}>Back</button>
       </div>
       <div>
-        <h3>Comments</h3>
+        {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
         {cat?.comments?.map((element) => {
           return (
             <>
