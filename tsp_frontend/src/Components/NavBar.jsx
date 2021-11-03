@@ -43,11 +43,11 @@ function NavBar({ role, auth, handleLogOut, userName }) {
         <LinkStyled to="/cats/list" className="cats">
           <Li>Cats</Li>
         </LinkStyled>
+        <LinkStyled to="/about" className="about">
+          <Li>About us</Li>
+        </LinkStyled>
         <LinkStyled to="/contact" className="contact">
           <Li>Contact us</Li>
-        </LinkStyled>
-        <LinkStyled to="/about" className="about">
-          <Li>About</Li>
         </LinkStyled>
         {auth === "NoAuth" ? (
           <>
