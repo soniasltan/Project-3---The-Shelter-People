@@ -21,8 +21,8 @@ We want to create a useful app that would be of help for the shelter volunteers.
 
 ### MVP
 - User-facing page: Showing cats + about + contact info (no authentication required to view)
-- Authenticated login for admins
-- Authenticated login for users to leave comments
+- Authenticated login for Admins
+- Authenticated login for Guest users to leave comments
 - Separate views to add/update/delete animal details
 
 Suggested pages:
@@ -34,7 +34,7 @@ Suggested pages:
 6.  Sign up page: Sign up for new user account
 7.	Login Page for: 
 a.	Admin: Login page for admin to edit/add/delete cats. Only admin can do so, we don’t want people from outside meddling with the pages and cat list.
-b. User: Login to be able to leave a comment.
+b. Guest user: Login to be able to leave a comment.
 
 ### Wireframes
 <img src="./drawio/wireframe1.JPG"/>
@@ -44,9 +44,13 @@ b. User: Login to be able to leave a comment.
 ### User Stories
 
 There will be 2 main groups of users: Admin and Guest.
-Admin users are the shelter people volunteers and they are able to create/read/update/delete the cats.
-Guest users are just browsing the website and they can either be logged in or not.
-Guest users that are logged in can add comments.
+
+Admin users:
+The shelter people volunteers and they are able to create/read/update/delete the cats.
+
+Guest users:
+Be it logged in or not, they can browse the website.
+However, guest users who are logged in can add comments for the cats.
 
 ```
 To use the app, user should:
