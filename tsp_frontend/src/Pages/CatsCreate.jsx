@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
-function CatsCreate() {
+function CatsCreate({ role, auth }) {
   let history = useHistory();
   ///////////////////////// useRef for uncontrolled form //////////////////////////////////
   const inputCatName = useRef();
@@ -15,25 +15,32 @@ function CatsCreate() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // get the cat information from the form
-    const name = inputCatName.current.value;
-    const description = inputCatDescription.current.value;
-    const image = inputCatImage.current.value;
-    const gender = inputCatGender.current.value;
-    const adoptable = inputCatAdopt.current.value;
-    const cage = inputCatCage.current.value;
-    const catInformation = {
-      name,
-      description,
-      image,
-      gender,
-      adoptable,
-      cage,
-    };
-    await axios.post(`http://localhost:3000/api/cats/`, catInformation).then((res) => {
-        window.alert(`Cat created successfully!`);
-        history.push(`/cats/list`);
-      });
+    if (role === "Admin" && auth === "Auth") {
+      // get the cat information from the form
+      const name = inputCatName.current.value;
+      const description = inputCatDescription.current.value;
+      const image = inputCatImage.current.value;
+      const gender = inputCatGender.current.value;
+      const adoptable = inputCatAdopt.current.value;
+      const cage = inputCatCage.current.value;
+      const catInformation = {
+        name,
+        description,
+        image,
+        gender,
+        adoptable,
+        cage,
+      };
+      await axios
+        .post(`http://localhost:3000/api/cats/`, catInformation)
+        .then((res) => {
+          window.alert(`Cat created successfully!`);
+          history.push(`/cats/list`);
+        });
+    } else {
+      window.alert(`Sorry, only Admin can create cats!`);
+      history.push(`/cats/list`);
+    }
   };
 
   return (
