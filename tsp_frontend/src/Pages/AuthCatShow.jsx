@@ -82,7 +82,7 @@ function AuthCatShow({ userName, role }) {
             <>
               <p key={element._id}>
                 <p>
-                <hr/>
+                  <hr />
                   {element.text}
                   {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
                   {role === "Admin" && (
@@ -95,7 +95,7 @@ function AuthCatShow({ userName, role }) {
                       </button>
                     </>
                   )}
-                  {element.username === userName && (
+                  {element.username === userName && role === "Guest" && (
                     <>
                       <button onClick={() => updateComment(element._id)}>
                         &#9998;
@@ -107,7 +107,8 @@ function AuthCatShow({ userName, role }) {
                   )}
                 </p>
                 <br />
-                <p>Posted by: {element.username}</p><hr/>
+                <p>Posted by: {element.username}</p>
+                <hr />
               </p>
             </>
           );
