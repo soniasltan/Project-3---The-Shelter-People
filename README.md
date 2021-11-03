@@ -15,7 +15,10 @@ We want to create a useful app that would be of help for the shelter volunteers.
 - MongoDB
 - Express
 - React
+- React Router
 - NodeJS
+- Axios
+- Styled Components CSS
 ```
 
 ### MVP
@@ -82,11 +85,9 @@ npm installation
 
 ```
 React frontend:
-- React
-- React-router-dom
-- React-router
+- React router + React-router-dom
 - Axios
-- Styled Components
+- Styled Components CSS
 - @react-google-maps/api
 - React-instagram-embed
 ```
