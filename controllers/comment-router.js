@@ -7,6 +7,13 @@ const router = express.Router();
 const CommentCtrl = require("./comment-ctrl");
 
 // =======================================
+//              GET ROUTES
+// =======================================
+// This is for show page, showing particular comment
+// :id is the comment's id
+router.get("/comments/:id", CommentCtrl.getCommentById);
+
+// =======================================
 //              POST ROUTES
 // =======================================
 // This is for new comment for a particular cat
