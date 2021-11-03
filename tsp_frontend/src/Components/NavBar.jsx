@@ -8,7 +8,6 @@ const Navbar = styled.nav`
   justify-content: center;
   width: 100%;
   height: 6vh;
-  padding: 0 20px;
   background-color: beige;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `;
