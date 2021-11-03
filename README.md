@@ -22,11 +22,20 @@ a.	Admin: login page for admin to edit/add/delete pages (cats+blog). Only admin 
 ### Technology Used
 
 ```
-- Mongo
-- Express
 - React
-- React Router
+- React-router-dom
+- React-router
+- Axios
+- Styled Components
+- @react-google-maps/api
+- react-instagram-embed
+- MongoDB
+- Express
+- Express-sessions
 - NodeJS
+- dotenv
+- bcrypt
+
 ```
 ### MVP
 User-facing page showing cats + about + contact info (no authentication required to view)
