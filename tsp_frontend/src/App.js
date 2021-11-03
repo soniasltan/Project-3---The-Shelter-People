@@ -1,19 +1,24 @@
+import axios from "axios";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./Components/Home";
-import NavBar from "./Components/NavBar";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
+import Home from "./Components/Home";
+import NavBar from "./Components/NavBar";
+import AuthCatShow from "./Pages/AuthCatShow";
+import CatsCreate from "./Pages/CatsCreate";
+import CatShow from "./Pages/CatShow";
 import CatsList from "./Pages/CatsList";
 import CatsUpdate from "./Pages/CatsUpdate";
-import CatsCreate from "./Pages/CatsCreate";
-import AuthCatShow from "./Pages/AuthCatShow";
-import CatShow from "./Pages/CatShow";
 import Login from "./Pages/Login";
 import UserCreate from "./Pages/UserCreate";
-import axios from "axios";
 
 function App() {
   const [auth, setAuth] = useState("NoAuth");
@@ -37,16 +42,16 @@ function App() {
           handleLogOut={handleLogOut}
           userName={userName}
         />
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
         <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
           <Route path="/login">
             <Login
               setAuth={setAuth}
@@ -72,6 +77,9 @@ function App() {
             ) : (
               <CatShow />
             )}
+          </Route>
+          <Route>
+            <Redirect to="/" />
           </Route>
         </Switch>
       </Router>
