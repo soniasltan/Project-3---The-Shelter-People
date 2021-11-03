@@ -22,7 +22,6 @@ function AuthCatShow({ userName, role }) {
   // handle function for adding comment
   const handleComment = (event) => {
     event.preventDefault();
-    setToggle(!toggle);
     let text = value;
     let cat_id = id.id;
     let user_id = userName;
@@ -32,6 +31,7 @@ function AuthCatShow({ userName, role }) {
     axios.post(`/api/cats/${id.id}/newcomment`, payload).then((res) => {
       window.alert(`Comment added!`);
     });
+    setToggle(!toggle);
   };
 
   // handle function for updating comment
@@ -44,9 +44,12 @@ function AuthCatShow({ userName, role }) {
     setToggle(!toggle);
     axios.delete(`/api/comments/${commentid}`);
     window.alert(`Comment deleted!`);
+    // Potential brain drain: need to understand the structure of cat + comments
+    // Each cat contains an array of comments, each comment is an object
     // This is the removed comment
-    let removedComment = cat.comments.filter((el) => {return el._id === commentid})[0];
-    console.log("FILTER", cat.comments.filter(c =>c._id !== removedComment._id));
+    let removedComment = cat.comments.filter((comment) => {return comment._id === commentid})[0];
+    // Now need to get the comment out of the cat, without messing the other cat data values
+    // use spread operator to keep the other cat data values, then set the comments to not include the removed comment
     setCat({...cat, comments: cat.comments.filter(c =>c._id !== removedComment._id)});
   };
 
@@ -58,7 +61,7 @@ function AuthCatShow({ userName, role }) {
       });
     }
     getCatData();
-  }, []);
+  }, [toggle]);
 
   return (
     <>
