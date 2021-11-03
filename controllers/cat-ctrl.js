@@ -20,6 +20,11 @@ const createCat = async (req, res) => {
   try {
     // req.body exists, so make a new cat
     const cat = new Cat(req.body);
+    // if cat image url is empty, fill in with default cat image
+    if (cat.image === "") {
+      cat.image =
+        "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d";
+    }
     await cat.save();
 
     // somehow, if the new cat doesn't exist, return error
@@ -61,6 +66,11 @@ const updateCat = async (req, res) => {
     cat.gender = req.body.gender;
     cat.adoptable = req.body.adoptable;
     cat.cage = req.body.cage;
+    // if cat image url is empty, fill in with default cat image
+    if (cat.image === "") {
+      cat.image =
+        "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d";
+    }
     // save the updated cat
     await cat.save();
     if (!cat) {
