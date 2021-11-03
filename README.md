@@ -44,11 +44,11 @@ b. Guest user: Login to be able to leave a comment.
 There will be 2 main groups of users: Admin and Guest.
 
 Admin users:
-The shelter people volunteers and they are able to create/read/update/delete the cats.
+The shelter people volunteers and they will be able to create/read/update/delete the cats.
 
 Guest users:
-Be it logged in or not, they can browse the website.
-However, guest users who are logged in can add comments for the cats.
+They can browse the website without logging in.
+However, only guest users who are logged in can add comments for the cats.
 
 ```
 To use the app, user should:
@@ -64,14 +64,17 @@ To use the app, user should:
 
 ---
 
-### General Approach / Problem-Solving Strategy
-Our general approach is to divide and conquer. Work is split into components and pair programming method was initialised.
+### General Approach
+Our general approach is to divide and conquer. 
+A project leader, github manager and task manager was appointed.
+
+Work is split into components and pair programming method was initialised.
 
 Starting with the express backend - we configured the server side by connecting Node.js and Express to MongoDB on the backend. Our models, controllers and mongoDB was set up and we moved on to set up the database.
 
 After that, we started building the frontend, using React to build our user interfaces.
 
-Once these are completed, we connected the frontend to the backend.
+Once these are completed, we connected the frontend to the backend before working on styling last.
 
 ## Installation instructions for dependencies
 <!-- Fill up as the project goes along... -->
