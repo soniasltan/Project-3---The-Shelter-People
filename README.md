@@ -5,22 +5,9 @@ Animal Shelter Website for TheShelterPeople.
 Visit the website here: https://theshelterpeople.herokuapp.com/
 
 ## Description
-We want to create a useful app that would be of help for the shelter volunteers (volunteer group at Animal Lodge @ sungei tengah).
+We want to create a useful app that would be of help for the shelter volunteers. They are a volunteer group at Animal Lodge @ sungei tengah.
 
--	Helping the shelter volunteers to organise their animal details list -  keep track of the cats inside? Name, cage, description, photo, gender, adoptable
--	App is meant to raise awareness about the cats + showcase the cats
-
-Suggested pages:
-1.	Nav bar: Home/Cats/Contact/About/Sign up/Login
-2.	Home page: A short intro about the shelter and the location of the shelter
-3.	Cats page: Displays the cats (name, cage, image, description, adoptable, gender)
-4.	Contact Page: Link to theshelterpeople’s instagram at @theshelterpeople_sg + address + map 
-5.	About page: Explain more about the team behind the website, i.e. GA SEI-32 Group + TheShelterPeople
-6.  Sign up page: Sign up for new user account
-7.	Login Page for: 
-a.	Admin: Login page for admin to edit/add/delete cats. Only admin can do so, we don’t want people from outside meddling with the pages and cat list.
-b. User: Login to be able to leave a comment.
-
+-	App is meant to help the shelter volunteers to organise their animal details list, raise awareness about the cats + showcase the cats
 
 ### Technology Used
 
@@ -32,32 +19,22 @@ b. User: Login to be able to leave a comment.
 - NodeJS
 ```
 
-### Installation Notes
-
-```
-React frontend:
-- React
-- React-router-dom
-- React-router
-- Axios
-- Styled Components
-- @react-google-maps/api
-- React-instagram-embed
-```
-
-```
-Express backend:
-- Express
-- Express-sessions
-- NodeJS
-- Dotenv
-- Bcrypt
-```
-
 ### MVP
-User-facing page showing cats + about + contact info (no authentication required to view)
-Authenticated login for admins
-Separate views to add/delete animal details
+- User-facing page: Showing cats + about + contact info (no authentication required to view)
+- Authenticated login for admins
+- Authenticated login for users to leave comments
+- Separate views to add/update/delete animal details
+
+Suggested pages:
+1.	Nav bar: Home/Cats/Contact/About/Sign up/Login
+2.	Home page: A short intro about the shelter and the location of the shelter
+3.	Cats page: Displays the cats (name, cage, image, description, adoptable, gender)
+4.	Contact Page: Link to theshelterpeople’s instagram at @theshelterpeople_sg + address + map 
+5.	About page: Explain more about the team behind the website, i.e. GA SEI-32 Group + TheShelterPeople
+6.  Sign up page: Sign up for new user account
+7.	Login Page for: 
+a.	Admin: Login page for admin to edit/add/delete cats. Only admin can do so, we don’t want people from outside meddling with the pages and cat list.
+b. User: Login to be able to leave a comment.
 
 ### Wireframes
 <img src="./drawio/wireframe1.JPG"/>
@@ -99,8 +76,23 @@ Unsolved problems here...
 ## Installation instructions for dependencies
 <!-- Fill up as the project goes along... -->
 npm installation
-- Express
-- bcrypt
-- mongoose
 
----
+```
+React frontend:
+- React
+- React-router-dom
+- React-router
+- Axios
+- Styled Components
+- @react-google-maps/api
+- React-instagram-embed
+```
+
+```
+Express backend:
+- Express
+- Express-sessions
+- NodeJS
+- Dotenv
+- Bcrypt
+```
