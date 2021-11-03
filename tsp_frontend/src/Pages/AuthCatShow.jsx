@@ -28,7 +28,7 @@ function AuthCatShow({ userName, role }) {
 
     const payload = { text, cat_id, user_id, username };
     axios
-      .post(`http://localhost:3000/api/cats/${id.id}/newcomment`, payload)
+      .post(`/api/cats/${id.id}/newcomment`, payload)
       .then((res) => {
         window.alert(`Comment added!`);
       });
@@ -40,7 +40,7 @@ function AuthCatShow({ userName, role }) {
     let updateCommentText = prompt("Update the comment:");
 
     await axios
-      .put(`http://localhost:3000/api/comments/${id}`, {
+      .put(`/api/comments/${id}`, {
         text: updateCommentText,
       })
       .then((res) => {
@@ -51,13 +51,13 @@ function AuthCatShow({ userName, role }) {
   // handle function for deleting comment
   const deleteComment = (id) => {
     setToggle(!toggle);
-    axios.delete(`http://localhost:3000/api/comments/${id}`);
+    axios.delete(`/api/comments/${id}`);
   };
 
   // useeffect to get the cats data
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`http://localhost:3000/api/cats/${id.id}`).then((cat) => {
+      await axios.get(`/api/cats/${id.id}`).then((cat) => {
         setCat(cat.data.data);
       });
     }

@@ -17,7 +17,7 @@ function CatsList({ role }) {
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatsData() {
-      await axios.get(`http://localhost:3000/api/cats/`).then((cat) => {
+      await axios.get(`/api/cats/`).then((cat) => {
         setCats(cat.data.data);
       });
     }
@@ -25,7 +25,7 @@ function CatsList({ role }) {
   }, []);
 
   const deleteCat = (id) => {
-    axios.delete(`http://localhost:3000/api/cats/${id}`);
+    axios.delete(`/api/cats/${id}`);
     window.alert(`Goodbye cat :(`);
     history.push(`/`);
   };

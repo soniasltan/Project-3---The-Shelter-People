@@ -4,7 +4,7 @@ import axios from "axios"
 
 const addUser = async (user) => {
     console.log("user", user)
-    await axios.post(`http://localhost:3000/api/users`, user)
+    await axios.post(`/api/users`, user)
 }
 
 function UserCreate() {

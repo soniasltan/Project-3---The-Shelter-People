@@ -19,7 +19,7 @@ function CatShow() {
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatData() {
-      await axios.get(`http://localhost:3000/api/cats/${id.id}`).then((cat) => {
+      await axios.get(`/api/cats/${id.id}`).then((cat) => {
         setCat(cat.data.data);
       });
     }
