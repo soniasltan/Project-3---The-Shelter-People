@@ -22,7 +22,9 @@ function Contact() {
   const position = {
     lat: 1.3812997,
     lng: 103.7255819,
-  };
+  }
+
+    console.log("IG Access Token", process.env.REACT_APP_IG_ACCESS_TOKEN)
 
   return (
     <>
@@ -35,8 +37,8 @@ function Contact() {
     </LoadScript>
       <P>Interested in volunteering? Check out our Instagram <a href = "https://www.instagram.com/theshelterpeople_sg/" target="_blank" rel="noreferrer">@theshelterpeople_sg</a> </P>
       {/* <InstagramEmbed
-  url='https://instagr.am/p/Zw9o4/'
-  clientAccessToken='123|456'
+  url='https://www.instagram.com/p/CUjybGpl_OW/'
+  clientAccessToken={process.env.REACT_APP_IG_ACCESS_TOKEN}
   maxWidth={320}
   hideCaption={false}
   containerTagName='div'
