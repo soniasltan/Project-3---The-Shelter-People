@@ -16,7 +16,7 @@ Suggested pages:
 3.	Cats page: Displays the cats (name, cage, image, description, adoptable, gender)
 4.	Contact Page: Link to theshelterpeople’s instagram at @theshelterpeople_sg + address + map 
 5.	About page: Explain more about the team behind the website, i.e. GA SEI-32 Group + TheShelterPeople
-6.  Sign up page: Sign up 
+6.  Sign up page: Sign up for new user account
 7.	Login Page for: 
 a.	Admin: Login page for admin to edit/add/delete cats. Only admin can do so, we don’t want people from outside meddling with the pages and cat list.
 b. User: Login to be able to leave a comment.
@@ -26,19 +26,34 @@ b. User: Login to be able to leave a comment.
 
 ```
 - React
+- React-router
+- MongoDB
+- Express
+- NodeJS
+```
+
+### Installation Notes
+
+```
+React frontend:
+- React
 - React-router-dom
 - React-router
 - Axios
 - Styled Components
 - @react-google-maps/api
 - React-instagram-embed
-- MongoDB
+```
+
+```
+Express backend:
 - Express
 - Express-sessions
 - NodeJS
 - Dotenv
 - Bcrypt
 ```
+
 ### MVP
 User-facing page showing cats + about + contact info (no authentication required to view)
 Authenticated login for admins
