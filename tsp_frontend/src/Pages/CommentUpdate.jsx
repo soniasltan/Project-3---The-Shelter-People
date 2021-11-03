@@ -4,28 +4,27 @@ import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 
-function CommentUpdate({ userName, role }) {
+function CommentUpdate() {
   let id = useParams();
   let history = useHistory();
-  // For the cat data
   const [value, setValue] = useState("");
   const [catid, setCatID] = useState("");
-  // handle function to return user to cat list page
-  const catListPage = () => {
+
+  // handle function to return user to cat page
+  const catPage = () => {
     history.push(`/cats/${catid}`);
   };
 
   // handle function for updating comment
-  const updateComment = async (id) => {
-    let updateCommentText = prompt("Update the comment:");
-
+  const updateComment = async () => {
     await axios
-      .put(`/api/comments/${id}`, {
-        text: updateCommentText,
+      .put(`/api/comments/${id.id}`, {
+        text: value,
       })
       .then((res) => {
         window.alert(`Comment updated!`);
       });
+    history.push(`/cats/${catid}`);
   };
 
   // useeffect to get the comment data
@@ -45,7 +44,8 @@ function CommentUpdate({ userName, role }) {
         <h3>Edit Comment</h3>
         <MDEditor value={value} onChange={setValue} />
       </div>
-      <button onClick={() => catListPage()}>Back</button>
+      <button onClick={() => updateComment()}>Update</button>
+      <button onClick={() => catPage()}>Back</button>
     </>
   );
 }
