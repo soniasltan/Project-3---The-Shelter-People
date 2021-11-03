@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
@@ -12,15 +13,30 @@ import AuthCatShow from "./Pages/AuthCatShow";
 import CatShow from "./Pages/CatShow";
 import Login from "./Pages/Login";
 import UserCreate from "./Pages/UserCreate";
+import axios from "axios";
 
 function App() {
   const [auth, setAuth] = useState("NoAuth");
   const [role, setRole] = useState("Guest");
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
+  const history = useHistory();
+  // handle function for logging out, passed as props to navbar
+  const handleLogOut = async (event) => {
+    await axios.delete(`http://localhost:3000/api/login`);
+    setAuth("NoAuth");
+    setRole("Guest");
+    setUsername("");
+    history.push(`/`);
+  };
   return (
     <div className="App">
       <Router>
-        <NavBar role={role} />
+        <NavBar
+          role={role}
+          auth={auth}
+          handleLogOut={handleLogOut}
+          userName={userName}
+        />
         <Route exact path="/">
           <Home />
         </Route>
@@ -42,19 +58,20 @@ function App() {
             <UserCreate />
           </Route>
           <Route path="/cats/list">
-            <CatsList />
+            <CatsList role={role} />
           </Route>
-          {/* ?? if first one is undef, take the second */}
-          {role === "Admin" && (
-            <Route path="/cats/new">
-              <CatsCreate />
-            </Route>
-          )}
+          <Route path="/cats/new">
+            <CatsCreate />
+          </Route>
           <Route path="/cats/edit/:id">
             <CatsUpdate />
           </Route>
           <Route path="/cats/:id">
-            <AuthCatShow />
+            {auth === "Auth" ? (
+              <AuthCatShow userName={userName} role={role} />
+            ) : (
+              <CatShow />
+            )}
           </Route>
         </Switch>
       </Router>
