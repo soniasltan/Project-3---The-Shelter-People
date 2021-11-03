@@ -58,9 +58,6 @@ function About() {
           public on not abandoning their pets, pets are for life.
           In turn, visits to the shelter can help the shelter cats to become
           more sociable and gain higher chance at getting adopted.</P>
-          <P>So join our journey here. Feel free to reach out to us via our contact
-          page for more information with regards to the shelter, volunteering,
-          adoption or cat related knowledge!</P>
         </Content3>
         <Content4></Content4>
       </ContentBox>
