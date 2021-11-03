@@ -9,7 +9,7 @@ const Navbar = styled.nav`
   width: 100%;
   height: 6vh;
   padding: 0 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: beige;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `;
 
