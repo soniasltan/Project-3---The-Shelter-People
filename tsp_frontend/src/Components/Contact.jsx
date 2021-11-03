@@ -33,7 +33,7 @@ function Contact() {
         <Marker position={position} />
       </GoogleMap>
     </LoadScript>
-      <P>Interested in volunteering? Check out our Instagram <a href = "https://www.instagram.com/theshelterpeople_sg/" target="_blank">@theshelterpeople_sg</a> </P>
+      <P>Interested in volunteering? Check out our Instagram <a href = "https://www.instagram.com/theshelterpeople_sg/" target="_blank" rel="noreferrer">@theshelterpeople_sg</a> </P>
       {/* <InstagramEmbed
   url='https://instagr.am/p/Zw9o4/'
   clientAccessToken='123|456'
