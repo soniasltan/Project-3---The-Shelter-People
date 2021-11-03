@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: grid;
-  height: 3vh;
+  height: 2vh;
   color: white;
 `;
 
@@ -38,7 +38,7 @@ const Logo = styled.img`
 function About() {
   return (
     <>
-      <h1>Hey there, welcome!</h1>
+      <h1>About Us</h1>
       <Container></Container>
       <ContentBox>
         <Content1></Content1>
