@@ -40,9 +40,14 @@ function AuthCatShow({ userName, role }) {
   };
 
   // handle function for deleting comment
-  const deleteComment = (id) => {
+  const deleteComment = (commentid) => {
     setToggle(!toggle);
-    axios.delete(`/api/comments/${id}`);
+    axios.delete(`/api/comments/${commentid}`);
+    window.alert(`Comment deleted!`);
+    // This is the removed comment
+    let removedComment = cat.comments.filter((el) => {return el._id === commentid})[0];
+    console.log("FILTER", cat.comments.filter(c =>c._id !== removedComment._id));
+    setCat({...cat, comments: cat.comments.filter(c =>c._id !== removedComment._id)});
   };
 
   // useeffect to get the cats data
@@ -67,7 +72,7 @@ function AuthCatShow({ userName, role }) {
         <button onClick={() => catListPage()}>Back</button>
       </div>
       <div>
-        {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
+        {cat?.comments.length > 0 ? <h3>Comments</h3> : <></>}
         {cat?.comments?.map((element) => {
           return (
             <>
