@@ -12,18 +12,16 @@ We want to create a useful app that would be of help for the shelter volunteers.
 ### Technology Used
 
 ```
-- React
-- React-router
 - MongoDB
 - Express
+- React
 - NodeJS
 ```
 
 ### MVP
 - User-facing page: Showing cats + about + contact info (no authentication required to view)
-- Authenticated login for Admins
+- Authenticated login for Admins to add/update/delete animal details
 - Authenticated login for Guest users to leave comments
-- Separate views to add/update/delete animal details
 
 Suggested pages:
 1.	Nav bar: Home/Cats/Contact/About/Sign up/Login
@@ -68,9 +66,13 @@ To use the app, user should:
 
 ### General Approach / Problem-Solving Strategy
 Our plan is to have 3 models: cats, comments, and users.
+
 Cats model (for CRUD): id, name, cage, image, description, adoptable, gender.
 Comments model: id, user id, text, cat id, timestamp.
 User model: id, username, email, password, role.
+
+Starting with the express backend - our models, controllers and mongoDB was set up.
+
 
 
 ### Unsolved problems
