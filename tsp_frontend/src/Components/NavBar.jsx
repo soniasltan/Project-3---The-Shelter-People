@@ -32,6 +32,7 @@ const LinkStyled = styled(Link)`
   color: black;
 `;
 
+
 function NavBar({ role, auth, handleLogOut, userName }) {
   return (
     <>
