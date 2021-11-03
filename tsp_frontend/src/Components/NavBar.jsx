@@ -5,10 +5,11 @@ import styled from "styled-components";
 const Navbar = styled.nav`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 6vh;
-  padding: 0 20px;
   background-color: beige;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
 `;
 
 const Li = styled.li`
@@ -18,12 +19,19 @@ const Li = styled.li`
   padding: 5px 26px;
   font-size: 16px;
   border-radius: 24px;
+  &:hover {
+    background-color: #EFBE93;
+  }
+  &:active {
+    background-color: #EFBE93;
+  }
 `;
 
 const LinkStyled = styled(Link)`
   text-decoration: none;
   color: black;
 `;
+
 
 function NavBar({ role, auth, handleLogOut, userName }) {
   return (
@@ -35,11 +43,11 @@ function NavBar({ role, auth, handleLogOut, userName }) {
         <LinkStyled to="/cats/list" className="cats">
           <Li>Cats</Li>
         </LinkStyled>
+        <LinkStyled to="/about" className="about">
+          <Li>About us</Li>
+        </LinkStyled>
         <LinkStyled to="/contact" className="contact">
           <Li>Contact us</Li>
-        </LinkStyled>
-        <LinkStyled to="/about" className="about">
-          <Li>About</Li>
         </LinkStyled>
         {auth === "NoAuth" ? (
           <>

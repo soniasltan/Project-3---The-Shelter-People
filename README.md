@@ -96,7 +96,7 @@ React frontend:
 Express backend:
 - Express
 - Express-sessions
-- NodeJS
+- Mongoose
 - Dotenv
 - Bcrypt
 ```
