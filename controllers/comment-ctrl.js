@@ -73,11 +73,9 @@ const updateComment = async (req, res) => {
 
     // now update the comment entry for the cat too
     const cat = await Cat.findById(comment.cat_id);
-    // remove the old, non-updated comment first
-    cat.comments.id(comment._id).remove();
-    // now add in the updated comment
-    cat.comments.push(comment);
-
+    // replace the text with the updated comment
+    cat.comments.id(comment._id).text = comment.text;
+    // save the cat
     await cat.save();
 
     res.status(200).json({
@@ -123,7 +121,9 @@ const getCommentById = async (req, res) => {
     // find the comment by id
     const comment = await Comment.findById(req.params.id);
     if (!comment) {
-      return res.status(404).json({ success: false, error: `Comment not found` });
+      return res
+        .status(404)
+        .json({ success: false, error: `Comment not found` });
     }
     // return json response if successful
     res.status(200).json({ success: true, data: comment });
