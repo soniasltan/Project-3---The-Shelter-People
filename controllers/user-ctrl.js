@@ -55,7 +55,7 @@ const deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     // remove comments associated with the user
-    Comment.remove({ user_id: { $in: req.params.id } }, (err, data) => {
+    Comment.remove({ user_id: { $in: user.username } }, (err, data) => {
       console.log(data);
     });
     // remove the user
