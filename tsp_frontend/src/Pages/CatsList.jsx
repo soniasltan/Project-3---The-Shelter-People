@@ -19,7 +19,6 @@ const LinkStyled = styled(Link)`
 `;
 
 const Div = styled.div`
-  display: inline-flex;
   margin: 5px;
 `;
 const CatWrapper = styled.div`
