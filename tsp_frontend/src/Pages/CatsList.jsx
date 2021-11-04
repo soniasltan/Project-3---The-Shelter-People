@@ -18,12 +18,15 @@ import Tilt from "react-parallax-tilt";
 function CatsList({ role }) {
   // For the cat data
   const [cats, setCats] = useState([]);
+  const [status, setStatus] = useState("pending")
   let history = useHistory();
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatsData() {
+      setStatus("loading")
       await axios.get(`/api/cats/`).then((cat) => {
         setCats(cat.data.data);
+        setStatus("resolved")
       });
     }
     getCatsData();
@@ -42,6 +45,7 @@ function CatsList({ role }) {
   return (
     <>
       <h1>Cats</h1>
+      {status === "loading" && <h3>Herding Cats...</h3>}
       <ContentContainer>
         {/* Only allow admin to make new cat */}
         {role === "Admin" && (
