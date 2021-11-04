@@ -8,6 +8,46 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
+const Button = styled.button`
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  margin: 6px 2px;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #EFBE93;
+  @media only screen and (max-width: 600px) {
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+  }
+  &:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  &:active {
+    background-color: grey};
+  }
+`;
+
+const ContentBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  grid-area: content;
+  align-items: center;
+`;
+
+const Content1 = styled.div`
+  width: 500px;
+  height: 100%;
+`;
+
 function AuthCatShow({ userName, role }) {
   let id = useParams();
   let history = useHistory();
@@ -66,13 +106,18 @@ function AuthCatShow({ userName, role }) {
   return (
     <>
       <div>
+      <ContentBox>
         <h1>{cat?.name}</h1>
         <Img src={cat?.image} alt={cat?.name} width="auto" height="400px" />
-        <p>Description: {cat?.description}</p>
-        <p>Gender: {cat?.gender}</p>
-        <p>Adoptable: {cat?.adoptable}</p>
-        <p>Cage: {cat?.cage}</p>
-        <button onClick={() => catListPage()}>Back</button>
+        <Content1>
+        <h4>Description:</h4>
+        <p> {cat?.description}</p>
+        <h4>Gender:</h4><p>{cat?.gender}</p>
+        <h4>Adoptable:</h4><p> {cat?.adoptable}</p>
+        <h4>Cage:</h4><p> {cat?.cage}</p>
+        </Content1>
+        <Button onClick={() => catListPage()}>Back</Button>
+        </ContentBox>
       </div>
       <div>
         {cat?.comments.length > 0 ? <h3>Comments</h3> : <></>}
@@ -114,7 +159,7 @@ function AuthCatShow({ userName, role }) {
         })}
         <form onSubmit={handleComment}>
           <MDEditor value={value} onChange={setValue} />
-          <button>Add comment</button>
+          <Button>Add comment</Button>
         </form>
       </div>
     </>
