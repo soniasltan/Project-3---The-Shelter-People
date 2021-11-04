@@ -90,7 +90,7 @@ function CatShow() {
       </div>
       <div>
         <br />
-      {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
+      {(cat?.comments.length > 0) ? <h2>Comments</h2> : <></>}
       {cat?.comments?.map((element) => {
         return (
           <>
