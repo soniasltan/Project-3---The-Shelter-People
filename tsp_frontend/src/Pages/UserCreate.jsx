@@ -14,6 +14,7 @@ const UserInfo = styled.div`
   display: flex;
   justify-contents: center;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
 const LabelContainer = styled.div`
@@ -29,13 +30,44 @@ const InputContainer = styled.div`
 `;
 
 const Label = styled.label`
-  margin: 4px 5px;
+  margin: 8px 5px 0px 0px;
   padding: 4px;
 `;
 
 const Input = styled.input`
+font-family: "Spartan", sans-serif;
+padding: 3px 0px;
+margin: 5px 5px;
+border: 1px solid black;
+border-radius: 6px;
+box-sizing: border-box;
+cursor: pointer;
+font-size: 16px;
+@media only screen and (max-width: 600px) {
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 14px;
+  position:relative;
+}
+}
+`;
+
+const PasswordDescription = styled.p`
+  font-size: 10px;
+  margin: -2px 5px 0px 11px;
+`;
+
+const PasswordLabel = styled.label`
+  margin: 11px 5px 0px 0px;
+  padding: 4px;
+`;
+
+const PasswordInput = styled.input`
   font-family: "Spartan", sans-serif;
-  margin: 5px;
+  padding: 3px 0px;
+  margin: 7px 5px;
   border: 1px solid black;
   border-radius: 6px;
   box-sizing: border-box;
@@ -126,9 +158,10 @@ function UserCreate() {
         <Label>
           Username:
         </Label>
-        <Label>
-          Password: <br />(min. 6 chars)
-        </Label>
+        <PasswordLabel>
+          Password:
+        </PasswordLabel>
+        <PasswordDescription>(min. 6 chars)</PasswordDescription>
         </LabelContainer>
         <InputContainer>
           <Input
@@ -145,13 +178,13 @@ function UserCreate() {
             onChange={handleUsernameChange}
             required
           ></Input>
-          <Input
+          <PasswordInput
             type="password"
             name="password"
             value={user.password}
             onChange={handlePasswordChange}
             required
-          ></Input>
+          ></PasswordInput>
           </InputContainer>
         </UserInfo>
         <Button>Create User</Button>
