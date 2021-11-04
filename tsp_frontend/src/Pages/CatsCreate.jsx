@@ -141,7 +141,7 @@ function CatsCreate({ role, auth }) {
         <LabelContainer>
         <Label>Name:</Label>
         <Label>Description:</Label>
-        <Label>Image url:</Label>
+        <Label>Image URL:</Label>
         <Label>Gender:</Label>
         <Label>Adoptable:</Label>
         <Label>Cage:</Label>
