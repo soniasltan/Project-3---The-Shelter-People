@@ -6,26 +6,27 @@ import styled from "styled-components";
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-contents: center;
+  justify-content: center;
   align-items: center;
 `;
 
 const Label = styled.label`
-  margin: 5px;
+  margin: 7px 5px 8px 5px;
 `;
 
-const UserInfo = styled.div`
+const CatInfo = styled.div`
   display: flex;
-  justify-contents: center;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 const LabelContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  margin-top: 2px;
+  margin-top: 2.5px;
 `;
 
 const InputContainer = styled.div`
@@ -36,6 +37,7 @@ const InputContainer = styled.div`
 const Input = styled.input`
 font-family: "Spartan", sans-serif;
   margin: 5px;
+  padding: 2px;
   border: 1px solid black;
   border-radius: 6px;
   box-sizing: border-box;
@@ -53,6 +55,8 @@ font-family: "Spartan", sans-serif;
 
 const Select = styled.select`
   margin: 5px;
+  border-radius: 6px;
+  padding: 2px;
   cursor: pointer;
   font-family: "Spartan", sans-serif;
 `;
@@ -61,7 +65,7 @@ const Button = styled.button`
   font-family: "Spartan", sans-serif;
   font-weight: bold;
   padding: 10px;
-  margin: 6px 2px;
+  margin: 7px 2px;
   border: none;
   border-radius: 6px;
   box-sizing: border-box;
@@ -133,29 +137,28 @@ function CatsCreate({ role, auth }) {
     <>
       <h1>Create New Cat</h1>
       <Form onSubmit={handleSubmit}>
+        <CatInfo>
+        <LabelContainer>
         <Label>Name:</Label>
-        <Input type="text" ref={inputCatName} minLength="2" required />
-        <br />
         <Label>Description:</Label>
-        <Input type="text" ref={inputCatDescription} minLength="1" required />
-        <br />
         <Label>Image url:</Label>
-        <Input type="url" ref={inputCatImage} minLength="5" />
-        <br />
         <Label>Gender:</Label>
+        <Label>Adoptable:</Label>
+        <Label>Cage:</Label>
+        </LabelContainer>
+        <InputContainer>
+        <Input type="text" ref={inputCatName} minLength="2" required />
+        <Input type="text" ref={inputCatDescription} minLength="1" required />
+        <Input type="url" ref={inputCatImage} minLength="5" />
         <Select ref={inputCatGender}>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Unknown">Unknown</option>
         </Select>
-        <br />
-        <Label>Adoptable:</Label>
         <Select ref={inputCatAdopt}>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
         </Select>
-        <br />
-        <Label>Cage:</Label>
         <Select ref={inputCatCage}>
           <option value="6/7">6/7</option>
           <option value="2">2</option>
@@ -165,6 +168,8 @@ function CatsCreate({ role, auth }) {
           <option value="8">8</option>
           <option value="9">9</option>
         </Select>
+        </InputContainer>
+        </CatInfo>
         <Button>Create New Cat</Button>
         <Button onClick={handleCancel}>Cancel</Button>
       </Form>
