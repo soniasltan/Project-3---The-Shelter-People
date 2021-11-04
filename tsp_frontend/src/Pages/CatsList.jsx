@@ -133,19 +133,6 @@ function CatsList({ role }) {
                       )}
                     </CardWrapper>
                   </Tilt>
-                  {/* <p key={element._id}>
-                  <LinkStyled to={`/cats/${element._id}`}>
-                    <Img
-                      src={element.image}
-                      alt={element.name}
-                      width="100px"
-                      height="100px"
-                    />
-                  </LinkStyled>
-                  <br />
-                  {element.name}
-                  <br />
-                  {/* Only allow delete/update if admin */}
                 </Div>
               </>
             );
