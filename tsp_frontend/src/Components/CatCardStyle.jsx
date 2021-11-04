@@ -34,12 +34,6 @@ export const CardImage = styled.div`
     color: #000;
   `;
 
-  //  export const CardTextBody = styled.p`
-  //     color: grey;
-  //     font-size: 15px;
-  //     font-weight: 300;
-  //   `;
-
   export const CardStatWrapper = styled.div`
     grid-area: stats;
     display: grid;
