@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
+import MDEditor from "@uiw/react-md-editor";
 
 const Img = styled.img`
   border-radius: 50%;
@@ -13,6 +14,7 @@ function AuthCatShow({ userName, role }) {
   // For the cat data
   const [cat, setCat] = useState();
   const [toggle, setToggle] = useState(false);
+  const [value, setValue] = useState("");
   // handle function to return user to cat list page
   const catListPage = () => {
     history.push(`/cats/list`);
@@ -20,38 +22,35 @@ function AuthCatShow({ userName, role }) {
   // handle function for adding comment
   const handleComment = (event) => {
     event.preventDefault();
-    setToggle(!toggle);
-    let text = event.target[0].value;
+    let text = value;
     let cat_id = id.id;
     let user_id = userName;
     let username = userName;
 
     const payload = { text, cat_id, user_id, username };
-    axios
-      .post(`/api/cats/${id.id}/newcomment`, payload)
-      .then((res) => {
-        window.alert(`Comment added!`);
-      });
+    axios.post(`/api/cats/${id.id}/newcomment`, payload).then((res) => {
+      window.alert(`Comment added!`);
+    });
+    setToggle(!toggle);
   };
 
   // handle function for updating comment
   const updateComment = async (id) => {
-    setToggle(!toggle);
-    let updateCommentText = prompt("Update the comment:");
-
-    await axios
-      .put(`/api/comments/${id}`, {
-        text: updateCommentText,
-      })
-      .then((res) => {
-        window.alert(`Comment updated!`);
-      });
+    history.push(`/comments/edit/${id}`);
   };
 
   // handle function for deleting comment
-  const deleteComment = (id) => {
+  const deleteComment = (commentid) => {
     setToggle(!toggle);
-    axios.delete(`/api/comments/${id}`);
+    axios.delete(`/api/comments/${commentid}`);
+    window.alert(`Comment deleted!`);
+    // Potential brain drain: need to understand the structure of cat + comments
+    // Each cat contains an array of comments, each comment is an object
+    // This is the removed comment
+    let removedComment = cat.comments.filter((comment) => {return comment._id === commentid})[0];
+    // Now need to get the comment out of the cat, without messing the other cat data values
+    // use spread operator to keep the other cat data values, then set the comments to not include the removed comment
+    setCat({...cat, comments: cat.comments.filter(c =>c._id !== removedComment._id)});
   };
 
   // useeffect to get the cats data
@@ -62,7 +61,7 @@ function AuthCatShow({ userName, role }) {
       });
     }
     getCatData();
-  }, [updateComment]);
+  }, [toggle]);
 
   return (
     <>
@@ -76,45 +75,45 @@ function AuthCatShow({ userName, role }) {
         <button onClick={() => catListPage()}>Back</button>
       </div>
       <div>
-        <h3>Comments</h3>
+        {cat?.comments.length > 0 ? <h3>Comments</h3> : <></>}
         {cat?.comments?.map((element) => {
           return (
             <>
               <p key={element._id}>
-                <p>
-                  <hr />
-                  {element.text}
-                  {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
-                  {role === "Admin" && (
-                    <>
-                      <button onClick={() => updateComment(element._id)}>
-                        &#9998;
-                      </button>
-                      <button onClick={() => deleteComment(element._id)}>
-                        &#128465;
-                      </button>
-                    </>
-                  )}
-                  {element.username === userName && role === "Guest" && (
-                    <>
-                      <button onClick={() => updateComment(element._id)}>
-                        &#9998;
-                      </button>
-                      <button onClick={() => deleteComment(element._id)}>
-                        &#128465;
-                      </button>
-                    </>
-                  )}
-                </p>
+                <hr />
+                <MDEditor.Markdown
+                  source={`**` + element.username + `** *commented:*`}
+                />
+                <MDEditor.Markdown source={element.text} />
+                {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
+                {role === "Admin" && (
+                  <>
+                    <button onClick={() => updateComment(element._id)}>
+                      &#9998; Edit
+                    </button>
+                    <button onClick={() => deleteComment(element._id)}>
+                      &#128465; Del
+                    </button>
+                  </>
+                )}
+                {element.username === userName && role === "Guest" && (
+                  <>
+                    <button onClick={() => updateComment(element._id)}>
+                      &#9998;
+                    </button>
+                    <button onClick={() => deleteComment(element._id)}>
+                      &#128465;
+                    </button>
+                  </>
+                )}
                 <br />
-                <p>Posted by: {element.username}</p>
                 <hr />
               </p>
             </>
           );
         })}
         <form onSubmit={handleComment}>
-          <input type="text" minLength="3" />
+          <MDEditor value={value} onChange={setValue} />
           <button>Add comment</button>
         </form>
       </div>

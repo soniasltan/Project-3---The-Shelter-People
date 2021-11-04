@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
+import MDEditor from "@uiw/react-md-editor";
 
 const Img = styled.img`
   border-radius: 50%;
@@ -16,7 +17,7 @@ function CatShow() {
   const catListPage = () => {
     history.push(`/cats/list`);
   };
-  // useeffect to get the cats data on render
+  // useeffect to get the cats data
   useEffect(() => {
     async function getCatData() {
       await axios.get(`/api/cats/${id.id}`).then((cat) => {
@@ -37,6 +38,22 @@ function CatShow() {
         <p>Cage: {cat?.cage}</p>
         <button onClick={() => catListPage()}>Back</button>
       </div>
+      {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
+      {cat?.comments?.map((element) => {
+        return (
+          <>
+            <p key={element._id}>
+              <hr />
+              <MDEditor.Markdown
+                source={`**` + element.username + `** *commented:*`}
+              />
+              <MDEditor.Markdown source={element.text} />
+              <br />
+              <hr />
+            </p>
+          </>
+        );
+      })}
     </>
   );
 }

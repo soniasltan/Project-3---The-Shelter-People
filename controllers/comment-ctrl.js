@@ -117,9 +117,25 @@ const deleteComment = async (req, res) => {
   }
 };
 
+// For showing a particular comment
+const getCommentById = async (req, res) => {
+  try {
+    // find the comment by id
+    const comment = await Comment.findById(req.params.id);
+    if (!comment) {
+      return res.status(404).json({ success: false, error: `Comment not found` });
+    }
+    // return json response if successful
+    res.status(200).json({ success: true, data: comment });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err });
+  }
+};
+
 // export the modules - CRUD
 module.exports = {
   createComment,
   updateComment,
   deleteComment,
+  getCommentById,
 };
