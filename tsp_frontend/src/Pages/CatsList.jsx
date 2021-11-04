@@ -10,20 +10,24 @@ import {
   CardStats,
   LinkText,
   CatCreateBtn,
-  Button, 
-  Div, CatWrapper, ContentContainer
+  Button,
+  Div,
+  CatWrapper,
+  ContentContainer,
 } from "../Styles/CatListStyle";
 import Tilt from "react-parallax-tilt";
 
 function CatsList({ role }) {
   // For the cat data
   const [cats, setCats] = useState([]);
+  const [loading, setLoading] = useState(true);
   let history = useHistory();
   // useeffect to get the cats data on render
   useEffect(() => {
     async function getCatsData() {
       await axios.get(`/api/cats/`).then((cat) => {
         setCats(cat.data.data);
+        setLoading(!loading);
       });
     }
     getCatsData();
@@ -42,6 +46,7 @@ function CatsList({ role }) {
   return (
     <>
       <h1>Cats</h1>
+      {loading === true ? <h2>Loading...</h2> : <></>}
       <ContentContainer>
         {/* Only allow admin to make new cat */}
         {role === "Admin" && (
