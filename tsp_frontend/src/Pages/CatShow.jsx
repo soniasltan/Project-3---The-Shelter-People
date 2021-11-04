@@ -5,7 +5,8 @@ import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 
 const Img = styled.img`
-  border-radius: 50%;
+  border-radius: 80%;
+  object-fit: cover;
 `;
 
 const Button = styled.button`
@@ -48,6 +49,10 @@ const Content1 = styled.div`
   height: 100%;
 `;
 
+const Container = styled.div`
+  width: 500px;
+`;
+
 function CatShow() {
   let id = useParams();
   let history = useHistory();
@@ -72,7 +77,7 @@ function CatShow() {
       <div>
         <ContentBox>
         <h1>{cat?.name}</h1>
-        <Img src={cat?.image} alt={cat?.name} width="auto" height="400px" />
+        <Img src={cat?.image} alt={cat?.name} width="400px" height="400px" />
         <Content1>
         <h4>Description:</h4>
         <p> {cat?.description}</p>
@@ -83,10 +88,13 @@ function CatShow() {
         <Button onClick={() => catListPage()}>Back</Button>
         </ContentBox>
       </div>
+      <div>
+        <br />
       {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
       {cat?.comments?.map((element) => {
         return (
           <>
+          <Container>
             <p key={element._id}>
               <hr />
               <MDEditor.Markdown
@@ -96,9 +104,11 @@ function CatShow() {
               <br />
               <hr />
             </p>
+            </Container>
           </>
         );
       })}
+      </div>
     </>
   );
 }
