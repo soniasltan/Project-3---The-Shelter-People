@@ -109,9 +109,9 @@ function CatsList({ role }) {
                 <Div class="cats">
                   <Tilt key={element._id}>
                     <CardWrapper>
-                      <CardImage background={element.image}>
-                        <Link to={`/cats/${element._id}`} />
-                      </CardImage>
+                        <Link to={`/cats/${element._id}`} >
+                      <CardImage src={element.image} />
+                      </Link>
                       <CardTextWrapper>
                         <CardTextTitle>{element.name}</CardTextTitle>
                       </CardTextWrapper>
