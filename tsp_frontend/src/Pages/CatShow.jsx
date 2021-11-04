@@ -35,6 +35,19 @@ const Button = styled.button`
   }
 `;
 
+const ContentBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  grid-area: content;
+  align-items: center;
+`;
+
+const Content1 = styled.div`
+  width: 500px;
+  height: 100%;
+`;
+
 function CatShow() {
   let id = useParams();
   let history = useHistory();
@@ -57,13 +70,18 @@ function CatShow() {
   return (
     <>
       <div>
+        <ContentBox>
         <h1>{cat?.name}</h1>
         <Img src={cat?.image} alt={cat?.name} width="auto" height="400px" />
-        <p>Description: {cat?.description}</p>
-        <p>Gender: {cat?.gender}</p>
-        <p>Adoptable: {cat?.adoptable}</p>
-        <p>Cage: {cat?.cage}</p>
+        <Content1>
+        <h4>Description:</h4>
+        <p> {cat?.description}</p>
+        <h4>Gender:</h4><p>{cat?.gender}</p>
+        <h4>Adoptable:</h4><p> {cat?.adoptable}</p>
+        <h4>Cage:</h4><p> {cat?.cage}</p>
+        </Content1>
         <Button onClick={() => catListPage()}>Back</Button>
+        </ContentBox>
       </div>
       {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
       {cat?.comments?.map((element) => {
