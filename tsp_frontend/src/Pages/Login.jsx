@@ -35,6 +35,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   font-family: "Spartan", sans-serif;
+  padding: 2px;
   margin: 5px;
   border: 1px solid black;
   border-radius: 6px;
