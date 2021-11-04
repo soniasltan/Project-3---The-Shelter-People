@@ -16,6 +16,7 @@ import Tilt from "react-parallax-tilt";
 const LinkStyled = styled(Link)`
   text-decoration: none;
   color: black;
+  margin: 0px 0px 15px 0px;
 `;
 
 const Div = styled.div`
