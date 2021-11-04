@@ -89,7 +89,7 @@ React frontend:
 - Axios
 - Styled Components CSS
 - @react-google-maps/api
-- React-instagram-embed
+- react-parallax-tilt
 ```
 
 ```
