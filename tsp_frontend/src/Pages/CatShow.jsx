@@ -8,6 +8,33 @@ const Img = styled.img`
   border-radius: 50%;
 `;
 
+const Button = styled.button`
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
+  padding: 10px;
+  margin: 6px 2px;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #EFBE93;
+  @media only screen and (max-width: 600px) {
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+  }
+  &:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  &:active {
+    background-color: grey};
+  }
+`;
+
 function CatShow() {
   let id = useParams();
   let history = useHistory();
@@ -36,7 +63,7 @@ function CatShow() {
         <p>Gender: {cat?.gender}</p>
         <p>Adoptable: {cat?.adoptable}</p>
         <p>Cage: {cat?.cage}</p>
-        <button onClick={() => catListPage()}>Back</button>
+        <Button onClick={() => catListPage()}>Back</Button>
       </div>
       {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
       {cat?.comments?.map((element) => {
