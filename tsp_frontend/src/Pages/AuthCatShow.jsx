@@ -5,7 +5,8 @@ import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
 
 const Img = styled.img`
-  border-radius: 50%;
+  border-radius: 80%;
+  object-fit: cover;
 `;
 
 const Button = styled.button`
@@ -35,6 +36,34 @@ const Button = styled.button`
   }
 `;
 
+const Button2 = styled.button`
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
+  padding: 7px;
+  margin: 6px 2px;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 10px;
+  background-color: #EFBE93;
+  @media only screen and (max-width: 600px) {
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 10px;
+    position: relative;
+  }
+  &:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  &:active {
+    background-color: grey};
+  }
+  text-align: center;
+`;
+
 const ContentBox = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -48,12 +77,16 @@ const Content1 = styled.div`
   height: 100%;
 `;
 
+const Container = styled.div`
+  width: 500px;
+`;
+
+
 function AuthCatShow({ userName, role }) {
   let id = useParams();
   let history = useHistory();
   // For the cat data
   const [cat, setCat] = useState();
-  const [toggle, setToggle] = useState(false);
   const [value, setValue] = useState("");
   // handle function to return user to cat list page
   const catListPage = () => {
@@ -69,9 +102,13 @@ function AuthCatShow({ userName, role }) {
 
     const payload = { text, cat_id, user_id, username };
     axios.post(`/api/cats/${id.id}/newcomment`, payload).then((res) => {
+      // Get the comment id of the newly added comment
+      let commentID = res.data.id;
+      // Append the newly created comment into cat
+      setCat({...cat, comments: [...cat.comments, {text: value, username: username, _id: commentID}]});
       window.alert(`Comment added!`);
     });
-    setToggle(!toggle);
+    setValue("");
   };
 
   // handle function for updating comment
@@ -79,9 +116,8 @@ function AuthCatShow({ userName, role }) {
     history.push(`/comments/edit/${id}`);
   };
 
-  // handle function for deleting comment
+  // handle function for deleting comment from cat
   const deleteComment = (commentid) => {
-    setToggle(!toggle);
     axios.delete(`/api/comments/${commentid}`);
     window.alert(`Comment deleted!`);
     // Potential brain drain: need to understand the structure of cat + comments
@@ -101,14 +137,14 @@ function AuthCatShow({ userName, role }) {
       });
     }
     getCatData();
-  }, [toggle]);
+  }, []);
 
   return (
     <>
       <div>
       <ContentBox>
         <h1>{cat?.name}</h1>
-        <Img src={cat?.image} alt={cat?.name} width="auto" height="400px" />
+        <Img src={cat?.image} alt={cat?.name} width="400px" height="400px" />
         <Content1>
         <h4>Description:</h4>
         <p> {cat?.description}</p>
@@ -119,11 +155,13 @@ function AuthCatShow({ userName, role }) {
         <Button onClick={() => catListPage()}>Back</Button>
         </ContentBox>
       </div>
+      <br />
       <div>
-        {cat?.comments.length > 0 ? <h3>Comments</h3> : <></>}
+        {cat?.comments.length > 0 ? <h2>Comments</h2> : <></>}
         {cat?.comments?.map((element) => {
           return (
             <>
+            <Container>
               <p key={element._id}>
                 <hr />
                 <MDEditor.Markdown
@@ -133,27 +171,29 @@ function AuthCatShow({ userName, role }) {
                 {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
                 {role === "Admin" && (
                   <>
-                    <button onClick={() => updateComment(element._id)}>
+                  <br />
+                    <Button2 onClick={() => updateComment(element._id)}>
                       &#9998; Edit
-                    </button>
-                    <button onClick={() => deleteComment(element._id)}>
+                    </Button2>
+                    <Button2 onClick={() => deleteComment(element._id)}>
                       &#128465; Del
-                    </button>
+                    </Button2>
                   </>
                 )}
                 {element.username === userName && role === "Guest" && (
                   <>
-                    <button onClick={() => updateComment(element._id)}>
+                    <Button2 onClick={() => updateComment(element._id)}>
                       &#9998;
-                    </button>
-                    <button onClick={() => deleteComment(element._id)}>
+                    </Button2>
+                    <Button2 onClick={() => deleteComment(element._id)}>
                       &#128465;
-                    </button>
+                    </Button2>
                   </>
                 )}
                 <br />
                 <hr />
               </p>
+              </Container>
             </>
           );
         })}
