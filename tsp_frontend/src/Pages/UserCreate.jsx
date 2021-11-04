@@ -3,12 +3,38 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-contents: center;
+  align-items: center;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  justify-contents: center;
+  align-items: center;
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Label = styled.label`
-  margin: 5px;
+  margin: 4px 5px;
+  padding: 4px;
 `;
 
 const Input = styled.input`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
   margin: 5px;
   border: 1px solid black;
   border-radius: 6px;
@@ -26,19 +52,19 @@ font-family: "Spartan", sans-serif;
   }
 `;
 
-
 const Button = styled.button`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
   padding: 10px;
   margin: 6px 2px;
-  border: 1px solid black;
+  border: none;
   border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
   font-size: 16px;
   background-color: #EFBE93;
   @media only screen and (max-width: 600px) {
-    border: 1px solid black;
+    border: none;
     border-radius: 6px;
     box-sizing: border-box;
     cursor: pointer;
@@ -91,9 +117,20 @@ function UserCreate() {
   return (
     <>
       <h1>Create New User</h1>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
+        <UserInfo>
+        <LabelContainer>
         <Label>
           Email:
+        </Label>
+        <Label>
+          Username:
+        </Label>
+        <Label>
+          Password: <br />(min. 6 chars)
+        </Label>
+        </LabelContainer>
+        <InputContainer>
           <Input
             type="email"
             name="email"
@@ -101,9 +138,6 @@ function UserCreate() {
             onChange={handleEmailChange}
             required
           ></Input>
-        </Label>
-        <Label>
-          Username:
           <Input
             type="text"
             name="username"
@@ -111,9 +145,6 @@ function UserCreate() {
             onChange={handleUsernameChange}
             required
           ></Input>
-        </Label>
-        <Label>
-          Password (min. 6 chars):
           <Input
             type="password"
             name="password"
@@ -121,9 +152,10 @@ function UserCreate() {
             onChange={handlePasswordChange}
             required
           ></Input>
-        </Label>
+          </InputContainer>
+        </UserInfo>
         <Button>Create User</Button>
-      </form>
+      </Form>
     </>
   );
 }
