@@ -50,7 +50,6 @@ const Input = styled.input`
     font-size: 14px;
     position:relative;
 }
-  }
 `;
 
 const Button = styled.button`

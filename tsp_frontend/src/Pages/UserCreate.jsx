@@ -51,7 +51,6 @@ font-size: 16px;
   font-size: 14px;
   position:relative;
 }
-}
 `;
 
 const PasswordDescription = styled.p`
@@ -80,7 +79,6 @@ const PasswordInput = styled.input`
     cursor: pointer;
     font-size: 14px;
     position:relative;
-}
   }
 `;
 
@@ -100,7 +98,6 @@ const ConfirmPasswordInput = styled.input`
     cursor: pointer;
     font-size: 14px;
     position:relative;
-}
   }
 `;
 
