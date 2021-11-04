@@ -1,8 +1,8 @@
+import MDEditor from "@uiw/react-md-editor";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
-import styled from "styled-components";
-import MDEditor from "@uiw/react-md-editor";
+import { useHistory, useParams } from "react-router-dom";
+import { Button, Container } from "../Styles/CommentsUpdateStyle";
 
 function CommentUpdate() {
   let id = useParams();
@@ -41,11 +41,13 @@ function CommentUpdate() {
   return (
     <>
       <div>
-        <h3>Edit Comment</h3>
-        <MDEditor value={value} onChange={setValue} />
+        <Container>
+          <h3>Edit Comment</h3>
+          <MDEditor value={value} onChange={setValue} />
+        </Container>
       </div>
-      <button onClick={() => updateComment()}>Update</button>
-      <button onClick={() => catPage()}>Back</button>
+      <Button onClick={() => updateComment()}>Update</Button>
+      <Button onClick={() => catPage()}>Back</Button>
     </>
   );
 }

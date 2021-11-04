@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Link, useHistory, useParams } from "react-router-dom";
-import styled from "styled-components";
+import { useHistory, useParams } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
-
-const Img = styled.img`
-  border-radius: 50%;
-`;
+import {
+  Img,
+  Button,
+  ContentBox,
+  Container,
+  Content1,
+} from "../Styles/CatShowStyle";
 
 function CatShow() {
   let id = useParams();
@@ -30,30 +32,43 @@ function CatShow() {
   return (
     <>
       <div>
-        <h1>{cat?.name}</h1>
-        <Img src={cat?.image} alt={cat?.name} width="auto" height="400px" />
-        <p>Description: {cat?.description}</p>
-        <p>Gender: {cat?.gender}</p>
-        <p>Adoptable: {cat?.adoptable}</p>
-        <p>Cage: {cat?.cage}</p>
-        <button onClick={() => catListPage()}>Back</button>
+        <ContentBox>
+          <h1>{cat?.name}</h1>
+          <Img src={cat?.image} alt={cat?.name} width="400px" height="400px" />
+          <Content1>
+            <h4>Description:</h4>
+            <p> {cat?.description}</p>
+            <h4>Gender:</h4>
+            <p>{cat?.gender}</p>
+            <h4>Adoptable:</h4>
+            <p> {cat?.adoptable}</p>
+            <h4>Cage:</h4>
+            <p> {cat?.cage}</p>
+          </Content1>
+          <Button onClick={() => catListPage()}>Back</Button>
+        </ContentBox>
       </div>
-      {(cat?.comments.length > 0) ? <h3>Comments</h3> : <></>}
-      {cat?.comments?.map((element) => {
-        return (
-          <>
-            <p key={element._id}>
-              <hr />
-              <MDEditor.Markdown
-                source={`**` + element.username + `** *commented:*`}
-              />
-              <MDEditor.Markdown source={element.text} />
-              <br />
-              <hr />
-            </p>
-          </>
-        );
-      })}
+      <div>
+        <br />
+        {cat?.comments.length > 0 ? <h2>Comments</h2> : <></>}
+        {cat?.comments?.map((element) => {
+          return (
+            <>
+              <Container>
+                <p key={element._id}>
+                  <hr />
+                  <MDEditor.Markdown
+                    source={`**` + element.username + `** *commented:*`}
+                  />
+                  <MDEditor.Markdown source={element.text} />
+                  <br />
+                  <hr />
+                </p>
+              </Container>
+            </>
+          );
+        })}
+      </div>
     </>
   );
 }
