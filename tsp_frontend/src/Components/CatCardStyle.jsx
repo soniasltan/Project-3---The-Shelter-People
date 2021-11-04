@@ -11,12 +11,14 @@ export const CardWrapper = styled.div`
     text-align: center;
   `;
 
-export const CardImage = styled.div`
+export const CardImage = styled.img`
+    display: block;
     grid-area: image;
-    background-image: url(${({ background }) => background});
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background-size: cover;
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
   `;
 
   export const CardTextWrapper = styled.div`
