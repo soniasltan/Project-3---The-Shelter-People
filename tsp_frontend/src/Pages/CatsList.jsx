@@ -18,9 +18,6 @@ const LinkStyled = styled(Link)`
   color: black;
 `;
 
-// const Img = styled.img`
-//   border-radius: 50%;
-// `;
 const Div = styled.div`
   display: inline-flex;
   margin: 5px;
@@ -118,15 +115,6 @@ function CatsList({ role }) {
                   {element.name}
                   <br />
                   {/* Only allow delete/update if admin */}
-                {/* {role === "Admin" && (
-                    <>
-                      <button onClick={() => updateCat(element._id)}>
-                        Update
-                      </button>
-                      <button onClick={() => deleteCat(element._id)}>X</button>
-                    </>
-                  )}
-                </p> */}
               </Div>
             </>
           );
