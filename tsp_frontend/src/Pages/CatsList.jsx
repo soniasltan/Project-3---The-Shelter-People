@@ -13,26 +13,57 @@ import {
 } from "../Components/CatCardStyle";
 import Tilt from "react-parallax-tilt";
 
-const LinkStyled = styled(Link)`
+const CatCreateBtn = styled(Link)`
   text-decoration: none;
-  color: black;
-  margin: 0px 0px 15px 0px;
+  outline: none;
+  border: none;
+`;
+
+const Button = styled.button`
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-radius: 30px;
+  background-color: #EFBE93;
+  color: #000;
+  padding: 10px 25px;
+  font-size: 18px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.5s ease;
+
+  &:hover {
+    background-color: rgb(228, 228, 228);
+  }
+  &:active {
+    background-color: grey};
+  }
+
+  @media only screen and (max-width: 1000px) {
+    /* width: 100%; */
+    padding: 10px 25px;
+  }
+  @media only screen and (max-width: 375px) {
+    padding: 10px 25px;
+    font-size: 16px;
+  }
 `;
 
 const Div = styled.div`
   margin: 5px;
 `;
 const CatWrapper = styled.div`
-width: 80%;
-margin: 5px auto;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
+  width: 80%;
+  margin: 5px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 `;
 const ContentContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 function CatsList({ role }) {
@@ -66,43 +97,43 @@ function CatsList({ role }) {
         {/* Only allow admin to make new cat */}
         {role === "Admin" && (
           <>
-            <LinkStyled to="/cats/new">
-              <button>Create Cat</button>
-            </LinkStyled>
+            <CatCreateBtn to="/cats/new">
+              <Button>Create Cat</Button>
+            </CatCreateBtn>
           </>
         )}
-        <CatWrapper >
-        {cats.map((element) => {
-          return (
-            <>
-              <Div class="cats">
-                <Tilt key={element._id}>
-                  <CardWrapper>
+        <CatWrapper>
+          {cats.map((element) => {
+            return (
+              <>
+                <Div class="cats">
+                  <Tilt key={element._id}>
+                    <CardWrapper>
                       <CardImage background={element.image}>
-                      <Link to={`/cats/${element._id}`} />
-                        </CardImage>
-                    <CardTextWrapper>
-                      <CardTextTitle>{element.name}</CardTextTitle>
-                    </CardTextWrapper>
-                    {role === "Admin" && (
-                      <>
-                        <CardStatWrapper>
-                          <CardStats>
-                            <LinkText onClick={() => updateCat(element._id)}>
-                              Update
-                            </LinkText>
-                          </CardStats>
-                          <CardStats>
-                            <LinkText onClick={() => deleteCat(element._id)}>
-                              X
-                            </LinkText>
-                          </CardStats>
-                        </CardStatWrapper>
-                      </>
-                    )}
-                  </CardWrapper>
-                </Tilt>
-                {/* <p key={element._id}>
+                        <Link to={`/cats/${element._id}`} />
+                      </CardImage>
+                      <CardTextWrapper>
+                        <CardTextTitle>{element.name}</CardTextTitle>
+                      </CardTextWrapper>
+                      {role === "Admin" && (
+                        <>
+                          <CardStatWrapper>
+                            <CardStats>
+                              <LinkText onClick={() => updateCat(element._id)}>
+                                Update
+                              </LinkText>
+                            </CardStats>
+                            <CardStats>
+                              <LinkText onClick={() => deleteCat(element._id)}>
+                                X
+                              </LinkText>
+                            </CardStats>
+                          </CardStatWrapper>
+                        </>
+                      )}
+                    </CardWrapper>
+                  </Tilt>
+                  {/* <p key={element._id}>
                   <LinkStyled to={`/cats/${element._id}`}>
                     <Img
                       src={element.image}
@@ -115,10 +146,10 @@ function CatsList({ role }) {
                   {element.name}
                   <br />
                   {/* Only allow delete/update if admin */}
-              </Div>
-            </>
-          );
-        })}
+                </Div>
+              </>
+            );
+          })}
         </CatWrapper>
       </ContentContainer>
     </>
