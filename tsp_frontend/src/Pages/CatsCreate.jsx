@@ -14,6 +14,10 @@ const Label = styled.label`
   margin: 7px 5px 8px 5px;
 `;
 
+const DescriptionLabel = styled.label`
+  margin: 40px 5px 43px 5px;
+`;
+
 const CatInfo = styled.div`
   display: flex;
   justify-content: center;
@@ -36,6 +40,27 @@ const InputContainer = styled.div`
 
 const Input = styled.input`
 font-family: "Spartan", sans-serif;
+  margin: 5px;
+  padding: 2px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position:relative;
+  }
+`;
+
+const DescriptionInput = styled.textarea`
+font-family: "Spartan", sans-serif;
+  height: 90px;
+  resize: none;
   margin: 5px;
   padding: 2px;
   border: 1px solid black;
@@ -140,7 +165,7 @@ function CatsCreate({ role, auth }) {
         <CatInfo>
         <LabelContainer>
         <Label>Name:</Label>
-        <Label>Description:</Label>
+        <DescriptionLabel>Description:</DescriptionLabel>
         <Label>Image URL:</Label>
         <Label>Gender:</Label>
         <Label>Adoptable:</Label>
@@ -148,7 +173,7 @@ function CatsCreate({ role, auth }) {
         </LabelContainer>
         <InputContainer>
         <Input type="text" ref={inputCatName} minLength="2" required />
-        <Input type="text" ref={inputCatDescription} minLength="1" required />
+        <DescriptionInput type="text" ref={inputCatDescription} minLength="1" required />
         <Input type="url" ref={inputCatImage} minLength="5" />
         <Select ref={inputCatGender}>
           <option value="Male">Male</option>
