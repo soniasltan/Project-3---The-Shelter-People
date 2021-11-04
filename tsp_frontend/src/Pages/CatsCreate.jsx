@@ -108,10 +108,10 @@ function CatsCreate({ role, auth }) {
       <h1>Create New Cat</h1>
       <form onSubmit={handleSubmit}>
         <Label>Name:</Label>
-        <Input type="text" ref={inputCatName} minLength="2" />
+        <Input type="text" ref={inputCatName} minLength="2" required/>
         <br />
         <Label>Description:</Label>
-        <Input type="text" ref={inputCatDescription} minLength="1" />
+        <Input type="text" ref={inputCatDescription} minLength="1" required/>
         <br />
         <Label>Image url:</Label>
         <Input type="url" ref={inputCatImage} minLength="5" />

@@ -118,6 +118,7 @@ function CatsUpdate({ role, auth }) {
           minLength="2"
           value={updateCatDetail.name}
           onChange={(event) => handleChange(event)}
+          required
         />
         <br />
         <Label>Description:</Label>
@@ -128,6 +129,7 @@ function CatsUpdate({ role, auth }) {
           size="2em"
           value={updateCatDetail.description}
           onChange={(event) => handleChange(event)}
+          required
         />
         <br />
         <Label>Image url:</Label>
@@ -137,6 +139,7 @@ function CatsUpdate({ role, auth }) {
           minLength="5"
           value={updateCatDetail.image}
           onChange={(event) => handleChange(event)}
+          
         />
         <br />
         <Label>Gender:</Label>

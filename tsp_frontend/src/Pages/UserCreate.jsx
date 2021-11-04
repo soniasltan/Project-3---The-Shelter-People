@@ -99,6 +99,7 @@ function UserCreate() {
             name="email"
             value={user.email}
             onChange={handleEmailChange}
+            required
           ></Input>
         </Label>
         <Label>
@@ -108,6 +109,7 @@ function UserCreate() {
             name="username"
             value={user.username}
             onChange={handleUsernameChange}
+            required
           ></Input>
         </Label>
         <Label>
@@ -117,6 +119,7 @@ function UserCreate() {
             name="password"
             value={user.password}
             onChange={handlePasswordChange}
+            required
           ></Input>
         </Label>
         <Button>Create User</Button>
