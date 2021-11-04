@@ -3,8 +3,34 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-contents: center;
+  align-items: center;
+`;
+
 const Label = styled.label`
   margin: 5px;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  justify-contents: center;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Input = styled.input`
@@ -22,7 +48,6 @@ font-family: "Spartan", sans-serif;
     cursor: pointer;
     font-size: 14px;
     position:relative;
-}
   }
 `;
 
@@ -33,17 +58,18 @@ const Select = styled.select`
 `;
 
 const Button = styled.button`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
   padding: 10px;
   margin: 6px 2px;
-  border: 1px solid black;
+  border: none;
   border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
   font-size: 16px;
   background-color: #EFBE93;
   @media only screen and (max-width: 600px) {
-    border: 1px solid black;
+    border: none;
     border-radius: 6px;
     box-sizing: border-box;
     cursor: pointer;
@@ -106,12 +132,12 @@ function CatsCreate({ role, auth }) {
   return (
     <>
       <h1>Create New Cat</h1>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Label>Name:</Label>
-        <Input type="text" ref={inputCatName} minLength="2" required/>
+        <Input type="text" ref={inputCatName} minLength="2" required />
         <br />
         <Label>Description:</Label>
-        <Input type="text" ref={inputCatDescription} minLength="1" required/>
+        <Input type="text" ref={inputCatDescription} minLength="1" required />
         <br />
         <Label>Image url:</Label>
         <Input type="url" ref={inputCatImage} minLength="5" />
@@ -139,11 +165,9 @@ function CatsCreate({ role, auth }) {
           <option value="8">8</option>
           <option value="9">9</option>
         </Select>
-        <br />
         <Button>Create New Cat</Button>
-        <br />
         <Button onClick={handleCancel}>Cancel</Button>
-      </form>
+      </Form>
     </>
   );
 }
