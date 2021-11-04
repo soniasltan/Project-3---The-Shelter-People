@@ -3,12 +3,39 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-contents: center;
+  align-items: center;
+`;
+
+const LoginInfo = styled.div`
+  display: flex;
+  justify-contents: center;
+  align-items: center;
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Label = styled.label`
-  margin: 5px;
+  margin: 4px 5px;
+  padding: 4px;
 `;
 
 const Input = styled.input`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
+  padding: 2px;
   margin: 5px;
   border: 1px solid black;
   border-radius: 6px;
@@ -23,21 +50,21 @@ font-family: "Spartan", sans-serif;
     font-size: 14px;
     position:relative;
 }
-  }
 `;
 
 const Button = styled.button`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
   padding: 10px;
   margin: 6px 2px;
-  border: 1px solid black;
+  border: none;
   border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
   font-size: 16px;
   background-color: #EFBE93;
   @media only screen and (max-width: 600px) {
-    border: 1px solid black;
+    border: none;
     border-radius: 6px;
     box-sizing: border-box;
     cursor: pointer;
@@ -91,28 +118,32 @@ function Login({ setAuth, setRole, setUsername }) {
   return (
     <>
       <h1>Login</h1>
-      <form>
-        <Label>
-          Username:
+      <Form>
+        <LoginInfo>
+        <LabelContainer>
+          <Label>Username:</Label>
+          <Label>Password:</Label>
+        </LabelContainer>
+        <InputContainer>
           <Input
             type="text"
             name="username"
             value={login.username}
             onChange={handleUsernameChange}
-          ></Input>
-        </Label>
-        <Label>
-          Password:
+          />
           <Input
             type="password"
             name="password"
             value={login.password}
             onChange={handlePasswordChange}
             minlength="6"
-          ></Input>
-        </Label>
-        <Button type="submit" onClick={handleSubmit} >Submit</Button>
-      </form>
+          />
+        </InputContainer>
+        </LoginInfo>
+        <Button type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
     </>
   );
 }

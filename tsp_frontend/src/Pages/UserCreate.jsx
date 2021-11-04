@@ -3,13 +3,70 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-contents: center;
+  align-items: center;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  justify-contents: center;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Label = styled.label`
-  margin: 5px;
+  margin: 8px 5px 0px 0px;
+  padding: 4px;
 `;
 
 const Input = styled.input`
 font-family: "Spartan", sans-serif;
-  margin: 5px;
+padding: 2px 2px;
+margin: 5px 5px;
+border: 1px solid black;
+border-radius: 6px;
+box-sizing: border-box;
+cursor: pointer;
+font-size: 16px;
+@media only screen and (max-width: 600px) {
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 14px;
+  position:relative;
+}
+`;
+
+const PasswordDescription = styled.p`
+  font-size: 10px;
+  margin: -2px 5px 0px 11px;
+`;
+
+const PasswordLabel = styled.label`
+  margin: 11px 5px 0px 0px;
+  padding: 4px;
+`;
+
+const PasswordInput = styled.input`
+  font-family: "Spartan", sans-serif;
+  padding: 3px 2px;
+  margin: 7px 5px;
   border: 1px solid black;
   border-radius: 6px;
   box-sizing: border-box;
@@ -22,23 +79,41 @@ font-family: "Spartan", sans-serif;
     cursor: pointer;
     font-size: 14px;
     position:relative;
-}
   }
 `;
 
+const ConfirmPasswordInput = styled.input`
+  font-family: "Spartan", sans-serif;
+  padding: 3px 2px;
+  margin: 10px 5px -3px 5px;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    border: 1px solid black;
+    border-radius: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    position:relative;
+  }
+`;
 
 const Button = styled.button`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
   padding: 10px;
   margin: 6px 2px;
-  border: 1px solid black;
+  border: none;
   border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
   font-size: 16px;
   background-color: #EFBE93;
   @media only screen and (max-width: 600px) {
-    border: 1px solid black;
+    border: none;
     border-radius: 6px;
     box-sizing: border-box;
     cursor: pointer;
@@ -77,10 +152,17 @@ function UserCreate() {
     setUser({ ...user, password: value });
   };
 
+  const handleConfirmPasswordChange = (event) => {
+    const value = event.target.value;
+      setUser({ ...user, confirmPassword: value });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (user.password.length < 6) {
       alert("Password must be at least 6 characters long!");
+    } else if (user.confirmPassword !== user.password) {
+      alert("Passwords do not match!")
     } else {
       addUser(user);
       alert(`New user ${user.username} created successfully!`);
@@ -91,9 +173,24 @@ function UserCreate() {
   return (
     <>
       <h1>Create New User</h1>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
+        <UserInfo>
+        <LabelContainer>
         <Label>
           Email:
+        </Label>
+        <Label>
+          Username:
+        </Label>
+        <PasswordLabel>
+          Password:
+        </PasswordLabel>
+        <PasswordDescription>(min. 6 chars)</PasswordDescription>
+        <PasswordLabel>
+          Confirm Password:
+        </PasswordLabel>
+        </LabelContainer>
+        <InputContainer>
           <Input
             type="email"
             name="email"
@@ -101,9 +198,6 @@ function UserCreate() {
             onChange={handleEmailChange}
             required
           ></Input>
-        </Label>
-        <Label>
-          Username:
           <Input
             type="text"
             name="username"
@@ -111,19 +205,24 @@ function UserCreate() {
             onChange={handleUsernameChange}
             required
           ></Input>
-        </Label>
-        <Label>
-          Password (min. 6 chars):
-          <Input
+          <PasswordInput
             type="password"
             name="password"
             value={user.password}
             onChange={handlePasswordChange}
             required
-          ></Input>
-        </Label>
+          ></PasswordInput>
+          <ConfirmPasswordInput
+            type="password"
+            name="confirm.password"
+            value={user.confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            required
+          ></ConfirmPasswordInput>
+          </InputContainer>
+        </UserInfo>
         <Button>Create User</Button>
-      </form>
+      </Form>
     </>
   );
 }
