@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {Form, LoginInfo, LabelContainer, InputContainer, Label, Input, Button} from "../Styles/LoginStyle"
+import {
+  Form,
+  LoginInfo,
+  LabelContainer,
+  InputContainer,
+  Label,
+  Input,
+  Button,
+} from "../Styles/LoginStyle";
 
 function Login({ setAuth, setRole, setUsername }) {
   const [login, setLogin] = useState({});
@@ -44,25 +52,25 @@ function Login({ setAuth, setRole, setUsername }) {
       <h1>Login</h1>
       <Form>
         <LoginInfo>
-        <LabelContainer>
-          <Label>Username:</Label>
-          <Label>Password:</Label>
-        </LabelContainer>
-        <InputContainer>
-          <Input
-            type="text"
-            name="username"
-            value={login.username}
-            onChange={handleUsernameChange}
-          />
-          <Input
-            type="password"
-            name="password"
-            value={login.password}
-            onChange={handlePasswordChange}
-            minlength="6"
-          />
-        </InputContainer>
+          <LabelContainer>
+            <Label>Username:</Label>
+            <Label>Password:</Label>
+          </LabelContainer>
+          <InputContainer>
+            <Input
+              type="text"
+              name="username"
+              value={login.username}
+              onChange={handleUsernameChange}
+            />
+            <Input
+              type="password"
+              name="password"
+              value={login.password}
+              onChange={handlePasswordChange}
+              minlength="6"
+            />
+          </InputContainer>
         </LoginInfo>
         <Button type="submit" onClick={handleSubmit}>
           Submit

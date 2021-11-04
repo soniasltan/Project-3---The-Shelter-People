@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import {Form, UserInfo, LabelContainer, InputContainer, Label, Input, PasswordDescription, PasswordLabel, PasswordInput, ConfirmPasswordInput, Button} from "../Styles/UserCreateStyle"
+import {
+  Form,
+  UserInfo,
+  LabelContainer,
+  InputContainer,
+  Label,
+  Input,
+  PasswordDescription,
+  PasswordLabel,
+  PasswordInput,
+  ConfirmPasswordInput,
+  Button,
+} from "../Styles/UserCreateStyle";
 
 const addUser = async (user) => {
   console.log("user", user);
@@ -29,7 +41,7 @@ function UserCreate() {
 
   const handleConfirmPasswordChange = (event) => {
     const value = event.target.value;
-      setUser({ ...user, confirmPassword: value });
+    setUser({ ...user, confirmPassword: value });
   };
 
   const handleSubmit = (event) => {
@@ -37,7 +49,7 @@ function UserCreate() {
     if (user.password.length < 6) {
       alert("Password must be at least 6 characters long!");
     } else if (user.confirmPassword !== user.password) {
-      alert("Passwords do not match!")
+      alert("Passwords do not match!");
     } else {
       addUser(user);
       alert(`New user ${user.username} created successfully!`);
@@ -50,50 +62,42 @@ function UserCreate() {
       <h1>Create New User</h1>
       <Form onSubmit={handleSubmit}>
         <UserInfo>
-        <LabelContainer>
-        <Label>
-          Email:
-        </Label>
-        <Label>
-          Username:
-        </Label>
-        <PasswordLabel>
-          Password:
-        </PasswordLabel>
-        <PasswordDescription>(min. 6 chars)</PasswordDescription>
-        <PasswordLabel>
-          Confirm Password:
-        </PasswordLabel>
-        </LabelContainer>
-        <InputContainer>
-          <Input
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={handleEmailChange}
-            required
-          ></Input>
-          <Input
-            type="text"
-            name="username"
-            value={user.username}
-            onChange={handleUsernameChange}
-            required
-          ></Input>
-          <PasswordInput
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={handlePasswordChange}
-            required
-          ></PasswordInput>
-          <ConfirmPasswordInput
-            type="password"
-            name="confirm.password"
-            value={user.confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            required
-          ></ConfirmPasswordInput>
+          <LabelContainer>
+            <Label>Email:</Label>
+            <Label>Username:</Label>
+            <PasswordLabel>Password:</PasswordLabel>
+            <PasswordDescription>(min. 6 chars)</PasswordDescription>
+            <PasswordLabel>Confirm Password:</PasswordLabel>
+          </LabelContainer>
+          <InputContainer>
+            <Input
+              type="email"
+              name="email"
+              value={user.email}
+              onChange={handleEmailChange}
+              required
+            ></Input>
+            <Input
+              type="text"
+              name="username"
+              value={user.username}
+              onChange={handleUsernameChange}
+              required
+            ></Input>
+            <PasswordInput
+              type="password"
+              name="password"
+              value={user.password}
+              onChange={handlePasswordChange}
+              required
+            ></PasswordInput>
+            <ConfirmPasswordInput
+              type="password"
+              name="confirm.password"
+              value={user.confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              required
+            ></ConfirmPasswordInput>
           </InputContainer>
         </UserInfo>
         <Button>Create User</Button>
