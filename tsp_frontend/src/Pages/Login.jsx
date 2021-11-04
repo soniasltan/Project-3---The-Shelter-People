@@ -121,8 +121,8 @@ function Login({ setAuth, setRole, setUsername }) {
       <Form>
         <LoginInfo>
         <LabelContainer>
-          <Label>Username</Label>
-          <Label>Password</Label>
+          <Label>Username:</Label>
+          <Label>Password:</Label>
         </LabelContainer>
         <InputContainer>
           <Input
