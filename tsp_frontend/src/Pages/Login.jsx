@@ -3,6 +3,13 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-contents: center;
+  align-items: center;
+`;
+
 const Label = styled.label`
   margin: 5px;
 `;
@@ -27,17 +34,18 @@ font-family: "Spartan", sans-serif;
 `;
 
 const Button = styled.button`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
+  font-weight: bold;
   padding: 10px;
   margin: 6px 2px;
-  border: 1px solid black;
+  border: none;
   border-radius: 6px;
   box-sizing: border-box;
   cursor: pointer;
   font-size: 16px;
   background-color: #EFBE93;
   @media only screen and (max-width: 600px) {
-    border: 1px solid black;
+    border: none;
     border-radius: 6px;
     box-sizing: border-box;
     cursor: pointer;
@@ -91,7 +99,7 @@ function Login({ setAuth, setRole, setUsername }) {
   return (
     <>
       <h1>Login</h1>
-      <form>
+      <Form>
         <Label>
           Username:
           <Input
@@ -112,7 +120,7 @@ function Login({ setAuth, setRole, setUsername }) {
           ></Input>
         </Label>
         <Button type="submit" onClick={handleSubmit} >Submit</Button>
-      </form>
+      </Form>
     </>
   );
 }
