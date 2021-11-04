@@ -10,12 +10,31 @@ const Form = styled.form`
   align-items: center;
 `;
 
+const LoginInfo = styled.div`
+  display: flex;
+  justify-contents: center;
+  align-items: center;
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Label = styled.label`
-  margin: 5px;
+  margin: 4px 5px;
+  padding: 4px;
 `;
 
 const Input = styled.input`
-font-family: "Spartan", sans-serif;
+  font-family: "Spartan", sans-serif;
   margin: 5px;
   border: 1px solid black;
   border-radius: 6px;
@@ -100,26 +119,30 @@ function Login({ setAuth, setRole, setUsername }) {
     <>
       <h1>Login</h1>
       <Form>
-        <Label>
-          Username:
+        <LoginInfo>
+        <LabelContainer>
+          <Label>Username</Label>
+          <Label>Password</Label>
+        </LabelContainer>
+        <InputContainer>
           <Input
             type="text"
             name="username"
             value={login.username}
             onChange={handleUsernameChange}
-          ></Input>
-        </Label>
-        <Label>
-          Password:
+          />
           <Input
             type="password"
             name="password"
             value={login.password}
             onChange={handlePasswordChange}
             minlength="6"
-          ></Input>
-        </Label>
-        <Button type="submit" onClick={handleSubmit} >Submit</Button>
+          />
+        </InputContainer>
+        </LoginInfo>
+        <Button type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
       </Form>
     </>
   );
