@@ -1,86 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import styled from "styled-components";
 import MDEditor from "@uiw/react-md-editor";
-
-const Img = styled.img`
-  border-radius: 80%;
-  object-fit: cover;
-`;
-
-const Button = styled.button`
-  font-family: "Spartan", sans-serif;
-  font-weight: bold;
-  padding: 10px;
-  margin: 6px 2px;
-  border: none;
-  border-radius: 6px;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 16px;
-  background-color: #EFBE93;
-  @media only screen and (max-width: 600px) {
-    border: none;
-    border-radius: 6px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 14px;
-    position: relative;
-  }
-  &:hover {
-    background-color: rgb(228, 228, 228);
-  }
-  &:active {
-    background-color: grey};
-  }
-`;
-
-const Button2 = styled.button`
-  font-family: "Spartan", sans-serif;
-  font-weight: bold;
-  padding: 7px;
-  margin: 6px 2px;
-  border: none;
-  border-radius: 6px;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 10px;
-  background-color: #EFBE93;
-  @media only screen and (max-width: 600px) {
-    border: none;
-    border-radius: 6px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 10px;
-    position: relative;
-  }
-  &:hover {
-    background-color: rgb(228, 228, 228);
-  }
-  &:active {
-    background-color: grey};
-  }
-  text-align: center;
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  grid-area: content;
-  align-items: center;
-`;
-
-const Content1 = styled.div`
-  width: 500px;
-  height: 100%;
-`;
-
-const Container = styled.div`
-  width: 500px;
-`;
-
+import {
+  Img,
+  Button,
+  Button2,
+  ContentBox,
+  Content1,
+  Container,
+} from "../Styles/AuthCatShowStyle";
 
 function AuthCatShow({ userName, role }) {
   let id = useParams();
@@ -105,7 +34,13 @@ function AuthCatShow({ userName, role }) {
       // Get the comment id of the newly added comment
       let commentID = res.data.id;
       // Append the newly created comment into cat
-      setCat({...cat, comments: [...cat.comments, {text: value, username: username, _id: commentID}]});
+      setCat({
+        ...cat,
+        comments: [
+          ...cat.comments,
+          { text: value, username: username, _id: commentID },
+        ],
+      });
       window.alert(`Comment added!`);
     });
     setValue("");
@@ -123,10 +58,15 @@ function AuthCatShow({ userName, role }) {
     // Potential brain drain: need to understand the structure of cat + comments
     // Each cat contains an array of comments, each comment is an object
     // This is the removed comment
-    let removedComment = cat.comments.filter((comment) => {return comment._id === commentid})[0];
+    let removedComment = cat.comments.filter((comment) => {
+      return comment._id === commentid;
+    })[0];
     // Now need to get the comment out of the cat, without messing the other cat data values
     // use spread operator to keep the other cat data values, then set the comments to not include the removed comment
-    setCat({...cat, comments: cat.comments.filter(c =>c._id !== removedComment._id)});
+    setCat({
+      ...cat,
+      comments: cat.comments.filter((c) => c._id !== removedComment._id),
+    });
   };
 
   // useeffect to get the cats data
@@ -142,17 +82,20 @@ function AuthCatShow({ userName, role }) {
   return (
     <>
       <div>
-      <ContentBox>
-        <h1>{cat?.name}</h1>
-        <Img src={cat?.image} alt={cat?.name} width="400px" height="400px" />
-        <Content1>
-        <h4>Description:</h4>
-        <p> {cat?.description}</p>
-        <h4>Gender:</h4><p>{cat?.gender}</p>
-        <h4>Adoptable:</h4><p> {cat?.adoptable}</p>
-        <h4>Cage:</h4><p> {cat?.cage}</p>
-        </Content1>
-        <Button onClick={() => catListPage()}>Back</Button>
+        <ContentBox>
+          <h1>{cat?.name}</h1>
+          <Img src={cat?.image} alt={cat?.name} width="400px" height="400px" />
+          <Content1>
+            <h4>Description:</h4>
+            <p> {cat?.description}</p>
+            <h4>Gender:</h4>
+            <p>{cat?.gender}</p>
+            <h4>Adoptable:</h4>
+            <p> {cat?.adoptable}</p>
+            <h4>Cage:</h4>
+            <p> {cat?.cage}</p>
+          </Content1>
+          <Button onClick={() => catListPage()}>Back</Button>
         </ContentBox>
       </div>
       <br />
@@ -161,38 +104,38 @@ function AuthCatShow({ userName, role }) {
         {cat?.comments?.map((element) => {
           return (
             <>
-            <Container>
-              <p key={element._id}>
-                <hr />
-                <MDEditor.Markdown
-                  source={`**` + element.username + `** *commented:*`}
-                />
-                <MDEditor.Markdown source={element.text} />
-                {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
-                {role === "Admin" && (
-                  <>
+              <Container>
+                <p key={element._id}>
+                  <hr />
+                  <MDEditor.Markdown
+                    source={`**` + element.username + `** *commented:*`}
+                  />
+                  <MDEditor.Markdown source={element.text} />
+                  {/* Only admin can update/delete all comments. Guest can only update/delete own comment */}
+                  {role === "Admin" && (
+                    <>
+                      <br />
+                      <Button2 onClick={() => updateComment(element._id)}>
+                        &#9998; Edit
+                      </Button2>
+                      <Button2 onClick={() => deleteComment(element._id)}>
+                        &#128465; Del
+                      </Button2>
+                    </>
+                  )}
+                  {element.username === userName && role === "Guest" && (
+                    <>
+                      <Button2 onClick={() => updateComment(element._id)}>
+                        &#9998;
+                      </Button2>
+                      <Button2 onClick={() => deleteComment(element._id)}>
+                        &#128465;
+                      </Button2>
+                    </>
+                  )}
                   <br />
-                    <Button2 onClick={() => updateComment(element._id)}>
-                      &#9998; Edit
-                    </Button2>
-                    <Button2 onClick={() => deleteComment(element._id)}>
-                      &#128465; Del
-                    </Button2>
-                  </>
-                )}
-                {element.username === userName && role === "Guest" && (
-                  <>
-                    <Button2 onClick={() => updateComment(element._id)}>
-                      &#9998;
-                    </Button2>
-                    <Button2 onClick={() => deleteComment(element._id)}>
-                      &#128465;
-                    </Button2>
-                  </>
-                )}
-                <br />
-                <hr />
-              </p>
+                  <hr />
+                </p>
               </Container>
             </>
           );
