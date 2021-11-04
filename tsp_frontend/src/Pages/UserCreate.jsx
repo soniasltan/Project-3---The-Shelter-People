@@ -1,132 +1,19 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
-import styled from "styled-components";
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-contents: center;
-  align-items: center;
-`;
-
-const UserInfo = styled.div`
-  display: flex;
-  justify-contents: center;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const LabelContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 2px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Label = styled.label`
-  margin: 8px 5px 0px 0px;
-  padding: 4px;
-`;
-
-const Input = styled.input`
-font-family: "Spartan", sans-serif;
-padding: 2px 2px;
-margin: 5px 5px;
-border: 1px solid black;
-border-radius: 6px;
-box-sizing: border-box;
-cursor: pointer;
-font-size: 16px;
-@media only screen and (max-width: 600px) {
-  border: 1px solid black;
-  border-radius: 6px;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 14px;
-  position:relative;
-}
-`;
-
-const PasswordDescription = styled.p`
-  font-size: 10px;
-  margin: -2px 5px 0px 11px;
-`;
-
-const PasswordLabel = styled.label`
-  margin: 11px 5px 0px 0px;
-  padding: 4px;
-`;
-
-const PasswordInput = styled.input`
-  font-family: "Spartan", sans-serif;
-  padding: 3px 2px;
-  margin: 7px 5px;
-  border: 1px solid black;
-  border-radius: 6px;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 16px;
-  @media only screen and (max-width: 600px) {
-    border: 1px solid black;
-    border-radius: 6px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 14px;
-    position:relative;
-  }
-`;
-
-const ConfirmPasswordInput = styled.input`
-  font-family: "Spartan", sans-serif;
-  padding: 3px 2px;
-  margin: 10px 5px -3px 5px;
-  border: 1px solid black;
-  border-radius: 6px;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 16px;
-  @media only screen and (max-width: 600px) {
-    border: 1px solid black;
-    border-radius: 6px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 14px;
-    position:relative;
-  }
-`;
-
-const Button = styled.button`
-  font-family: "Spartan", sans-serif;
-  font-weight: bold;
-  padding: 10px;
-  margin: 6px 2px;
-  border: none;
-  border-radius: 6px;
-  box-sizing: border-box;
-  cursor: pointer;
-  font-size: 16px;
-  background-color: #EFBE93;
-  @media only screen and (max-width: 600px) {
-    border: none;
-    border-radius: 6px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 14px;
-    position: relative;
-  }
-  &:hover {
-    background-color: rgb(228, 228, 228);
-  }
-  &:active {
-    background-color: grey};
-  }
-`;
+import {
+  Form,
+  UserInfo,
+  LabelContainer,
+  InputContainer,
+  Label,
+  Input,
+  PasswordDescription,
+  PasswordLabel,
+  PasswordInput,
+  ConfirmPasswordInput,
+  Button,
+} from "../Styles/UserCreateStyle";
 
 const addUser = async (user) => {
   console.log("user", user);
@@ -154,7 +41,7 @@ function UserCreate() {
 
   const handleConfirmPasswordChange = (event) => {
     const value = event.target.value;
-      setUser({ ...user, confirmPassword: value });
+    setUser({ ...user, confirmPassword: value });
   };
 
   const handleSubmit = (event) => {
@@ -162,7 +49,7 @@ function UserCreate() {
     if (user.password.length < 6) {
       alert("Password must be at least 6 characters long!");
     } else if (user.confirmPassword !== user.password) {
-      alert("Passwords do not match!")
+      alert("Passwords do not match!");
     } else {
       addUser(user);
       alert(`New user ${user.username} created successfully!`);
@@ -175,50 +62,42 @@ function UserCreate() {
       <h1>Create New User</h1>
       <Form onSubmit={handleSubmit}>
         <UserInfo>
-        <LabelContainer>
-        <Label>
-          Email:
-        </Label>
-        <Label>
-          Username:
-        </Label>
-        <PasswordLabel>
-          Password:
-        </PasswordLabel>
-        <PasswordDescription>(min. 6 chars)</PasswordDescription>
-        <PasswordLabel>
-          Confirm Password:
-        </PasswordLabel>
-        </LabelContainer>
-        <InputContainer>
-          <Input
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={handleEmailChange}
-            required
-          ></Input>
-          <Input
-            type="text"
-            name="username"
-            value={user.username}
-            onChange={handleUsernameChange}
-            required
-          ></Input>
-          <PasswordInput
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={handlePasswordChange}
-            required
-          ></PasswordInput>
-          <ConfirmPasswordInput
-            type="password"
-            name="confirm.password"
-            value={user.confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            required
-          ></ConfirmPasswordInput>
+          <LabelContainer>
+            <Label>Email:</Label>
+            <Label>Username:</Label>
+            <PasswordLabel>Password:</PasswordLabel>
+            <PasswordDescription>(min. 6 chars)</PasswordDescription>
+            <PasswordLabel>Confirm Password:</PasswordLabel>
+          </LabelContainer>
+          <InputContainer>
+            <Input
+              type="email"
+              name="email"
+              value={user.email}
+              onChange={handleEmailChange}
+              required
+            ></Input>
+            <Input
+              type="text"
+              name="username"
+              value={user.username}
+              onChange={handleUsernameChange}
+              required
+            ></Input>
+            <PasswordInput
+              type="password"
+              name="password"
+              value={user.password}
+              onChange={handlePasswordChange}
+              required
+            ></PasswordInput>
+            <ConfirmPasswordInput
+              type="password"
+              name="confirm.password"
+              value={user.confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              required
+            ></ConfirmPasswordInput>
           </InputContainer>
         </UserInfo>
         <Button>Create User</Button>

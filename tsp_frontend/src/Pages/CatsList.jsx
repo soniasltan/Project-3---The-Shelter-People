@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import styled from "styled-components";
 import {
   CardWrapper,
   CardImage,
@@ -10,61 +9,11 @@ import {
   CardStatWrapper,
   CardStats,
   LinkText,
-} from "../Components/CatCardStyle";
+  CatCreateBtn,
+  Button, 
+  Div, CatWrapper, ContentContainer
+} from "../Styles/CatListStyle";
 import Tilt from "react-parallax-tilt";
-
-const CatCreateBtn = styled(Link)`
-  text-decoration: none;
-  outline: none;
-  border: none;
-`;
-
-const Button = styled.button`
-  font-family: "Spartan", sans-serif;
-  font-weight: bold;
-  margin-bottom: 10px;
-  border-radius: 30px;
-  background-color: #EFBE93;
-  color: #000;
-  padding: 10px 25px;
-  font-size: 18px;
-  outline: none;
-  cursor: pointer;
-  border: none;
-  transition: all 0.5s ease;
-
-  &:hover {
-    background-color: rgb(228, 228, 228);
-  }
-  &:active {
-    background-color: grey};
-  }
-
-  @media only screen and (max-width: 1000px) {
-    /* width: 100%; */
-    padding: 10px 25px;
-  }
-  @media only screen and (max-width: 375px) {
-    padding: 10px 25px;
-    font-size: 16px;
-  }
-`;
-
-const Div = styled.div`
-  margin: 5px;
-`;
-const CatWrapper = styled.div`
-  width: 80%;
-  margin: 5px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 function CatsList({ role }) {
   // For the cat data
